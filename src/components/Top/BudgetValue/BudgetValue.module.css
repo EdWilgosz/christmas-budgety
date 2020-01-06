@@ -1,0 +1,28 @@
+.BudgetValueCont {
+    grid-column: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.BudgetValue {
+    font-size: 1.5rem;
+    color: #fff;
+	text-shadow: 0px -1px 4px white, 0px -2px 10px yellow, 0px -10px 20px #ff8000, 0px -18px 40px red;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 2px;
+    transform: scaleY(3);
+    transition: transform 250ms;
+}
+
+@media (min-width: 400px) {
+    .BudgetValue {
+        font-size: 1.75rem;
+    }
+}
+
+@media (min-width: 600px) {
+    .BudgetValue {
+        font-size: 2.5rem;
+    }
+}
