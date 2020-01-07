@@ -1,15 +1,29 @@
 import React from 'react';
+import { useStore } from '../../store/store';
 import BudgetCont from '../BudgetCont/BudgetCont';
 import ButtonBar from '../../components/UI/ButtonBar/ButtonBar';
 import InputDrawer from '../../components/UI/InputDrawer/InputDrawer';
 
 const Top = props => {
 
+    const state = useStore()[0];
+
+    let inputDrawer = () => {
+        if (!state.showDrawer) {
+            return null;
+        } else if (state.showDrawer && state.budgetDrawer) {
+            return <InputDrawer type='budget' />;
+        } else if (state.showDrawer && state.giftDrawer) {
+            return <InputDrawer type='gift' />
+        }
+    }
+
+
     return (
         <React.Fragment>
             <BudgetCont />
             <ButtonBar />
-            <InputDrawer type='budget' />
+            {inputDrawer()}
         </React.Fragment>
     );
 }
