@@ -1,12 +1,15 @@
 import React from 'react';
 import BudgetCont from '../BudgetCont/BudgetCont';
-import classes from './Top.module.css';
+import ButtonBar from '../../components/UI/ButtonBar/ButtonBar';
+import InputDrawer from '../../components/UI/InputDrawer/InputDrawer';
 
 const Top = props => {
 
     return (
         <React.Fragment>
             <BudgetCont />
+            <ButtonBar />
+            <InputDrawer type='budget' />
         </React.Fragment>
     );
 }

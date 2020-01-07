@@ -1,0 +1,32 @@
+.SubmitButton {
+    font-family: inherit;
+    width: 35%;
+    font-size: 0.9rem;
+    margin: 0.4rem auto;
+    padding: 0.4rem;
+    color: white;
+    background-color: rgba(219, 188, 97, 0.88);
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: transform 500ms;
+}
+
+.SubmitButton:hover {
+    transform: scale(1.05);
+}
+
+@media(min-width: 400px) {
+    .SubmitButton {
+        width: 40%;
+        font-size: 1rem;
+    }
+}
+
+@media(min-width: 600px) {
+    .SubmitButton {
+        width: 30%;
+        font-size: 1.2rem;
+        padding: 0.6rem;
+    }
+}
