@@ -2,7 +2,6 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     width: 90%;
-    max-width: 375px;
     margin: 0.15rem auto;
     padding: 0.25rem;
     color: white;
@@ -46,6 +45,7 @@
 
 .Arrow {
     display: none;
+    margin-left: 0.25rem;
 }
 
 
@@ -75,5 +75,32 @@
 
     .Perc {
         font-size: 0.8rem;
+    }
+
+    .Arrow {
+        display: inline-block;
+    }
+}
+
+@media (min-width: 900px) {
+    .Cont {
+        max-width: 375px;
+        padding: 0.75rem;
+    }
+
+    .Text {
+        font-size: 1rem;
+    }
+
+    .Val {
+        font-size: 1.1rem;
+    }
+
+    .Perc {
+        font-size: 1rem;
+    }
+
+    .Arrow {
+        display: inline-block;
     }
 }

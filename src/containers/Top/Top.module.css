@@ -23,6 +23,7 @@
 
 @media (min-width: 900px) {
     .Top {
+        height: 11rem;
         background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(../../assets/images/banner900.png);
     }
 }
