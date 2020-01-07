@@ -1,0 +1,13 @@
+.ButtonBar {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2;
+}
+
+.BudgetToggle {
+    grid-column: 1;
+}
+
+.NewGiftToggle {
+    grid-column: 2;
+}

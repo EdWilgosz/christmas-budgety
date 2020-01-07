@@ -1,18 +1,13 @@
 import React from 'react';
-import BudgetValue from '../../components/Top/BudgetValue/BudgetValue';
-import BudgetSnap from '../../components/Top/BudgetSnap/BudgetSnap';
+import BudgetCont from '../BudgetCont/BudgetCont';
 import classes from './Top.module.css';
 
 const Top = props => {
 
     return (
-        <div className={classes.Top}>
-            <BudgetValue />
-            <div className={classes.SpendSpentCont}>
-                <BudgetSnap type='spent'/>
-                <BudgetSnap type='tospend'/>
-            </div>
-        </div>
+        <React.Fragment>
+            <BudgetCont />
+        </React.Fragment>
     );
 }
 
