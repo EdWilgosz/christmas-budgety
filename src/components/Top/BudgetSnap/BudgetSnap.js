@@ -3,12 +3,18 @@ import classes from './BudgetSnap.module.css';
 
 const BudgetSnap = props => {
 
+    let type = props.type === 'spent';
+    let contType = [type ? classes.Spent : classes.ToSpend, classes.Cont].join(' ');
+    let textType = type ? 'ALREADY SPENT' : 'LEFT TO SPEND';
+    let valType = type ? '$567.98' : '$456.78';
+    let percType = type ? '54%' : '46%';
+
     return (
-        <div className={classes.Cont} style={props.type === 'spent' ? {backgroundColor: 'rgba(255,80,73, 0.5)' } : {backgroundColor: 'rgba(102,242,46, 0.5)'} }>
-        <div className={classes.Text}><p>{props.type === 'spent' ? 'ALREADY SPENT' : 'LEFT TO SPEND'} <span className={classes.Arrow}><i className="fas fa-arrow-right"></i></span></p></div>
+        <div className={contType}>
+            <div className={classes.Text}><p>{textType} <span className={classes.Arrow}><i className="fas fa-arrow-right"></i></span></p></div>
             <div className={classes.SumCont}>    
-                <div className={classes.Val}><p>{props.type === 'spent' ? '$567.98' : '$456.78'}</p></div>
-                <div className={classes.Perc}><p>{props.type === 'spent' ? '54%' : '46%'}</p></div>
+                <div className={classes.Val}><p>{valType}</p></div>
+                <div className={classes.Perc}><p>{percType}</p></div>
             </div>
         </div>
     );

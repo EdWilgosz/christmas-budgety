@@ -11,6 +11,22 @@
     transition: background-color 500ms;
 }
 
+.Spent {
+    background-color: rgba(255,80,73, 0.5);
+}
+
+.Spent:hover {
+    background-color: rgba(255,80,73, 0.8);
+}
+
+.ToSpend {
+    background-color: rgba(102,242,46, 0.5);
+}
+
+.ToSpend:hover {
+    background-color: rgba(102,242,46, 0.8);
+}
+
 .Text {
     grid-column: 1;
     grid-row: 1 / 3;
@@ -89,18 +105,14 @@
     }
 
     .Text {
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
 
     .Val {
-        font-size: 1.1rem;
-    }
-
-    .Perc {
         font-size: 1rem;
     }
 
-    .Arrow {
-        display: inline-block;
+    .Perc {
+        font-size: 0.9rem;
     }
 }

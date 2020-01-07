@@ -3,7 +3,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: transform 500ms;
 }
+
+.BudgetValueCont:hover {
+    transform: scale(1.1);
+}
+
 .BudgetValue {
     font-size: 1.5rem;
     color: #fff;

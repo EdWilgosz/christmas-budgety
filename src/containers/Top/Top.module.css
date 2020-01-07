@@ -11,6 +11,7 @@
 
 .SpendSpentCont {
     grid-column: 2;
+    align-items: center;
     display: grid;
 }
 
