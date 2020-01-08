@@ -12,8 +12,16 @@ const InputDrawer = props => {
 
     let submitHandler = () => {
         if (props.type === 'budget') {
-            dispatch('UPDATE_BUDGET_VALUE');
-            dispatch('TOGGLE_BUDGET_DRAWER');
+            let budgetInput = document.getElementById('budgetInput');
+            let value = budgetInput.value;
+            if (value > 0) {
+                let payload = { budgetInput: value };
+                dispatch('UPDATE_BUDGET_VALUE', payload);
+                dispatch('TOGGLE_BUDGET_DRAWER');
+            } else {
+                let payload = { errorMessage: 'please enter a valid usd price format (example: 12.00 or 12)' };
+                dispatch('ERROR_NUMBER_FORMAT', payload);
+            }
         } else if (props.type === 'gift') {
             let who = document.getElementById('whoInput');
             let what = document.getElementById('whatInput');
@@ -31,7 +39,7 @@ const InputDrawer = props => {
                     dispatch('TOGGLE_GIFT_DRAWER');
                 } else {
                     let payload = {
-                        errorMessage: 'please enter a valid usd format'
+                        errorMessage: 'please enter a valid usd price format (example: 12.00 or 12)'
                     }
                     dispatch('ERROR_NUMBER_FORMAT', payload);
                 }          
@@ -48,6 +56,8 @@ const InputDrawer = props => {
     let inputs = props.type === 'budget' ? 
         <div className={classes.InputDrawer}>
             <Input placeholder={'Enter budget'} type="budgetInput" />
+            <div className={classes.Break} />
+            {state.error ? <Error errorMessage={state.errorMessage} /> : null }
             <div className={classes.Break} />
             <SubmitButton type={props.type} clicked={submitHandler} /> 
         </div> : 

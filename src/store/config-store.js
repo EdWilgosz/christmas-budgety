@@ -7,13 +7,17 @@ const configureStore = () => {
                 return {
                     showDrawer: false,
                     budgetDrawer: false,
-                    giftDrawer: false
+                    giftDrawer: false,
+                    error: false,
+                    errorMessage: ''
                 }
             } else {
                 return {
                     showDrawer: true,
                     budgetDrawer: true,
-                    giftDrawer: false
+                    giftDrawer: false,
+                    error: false,
+                    errorMessage: ''
                 }
             }
         },
@@ -22,25 +26,26 @@ const configureStore = () => {
                 return {
                     showDrawer: false,
                     budgetDrawer: false,
-                    giftDrawer: false
+                    giftDrawer: false,
+                    error: false,
+                    errorMessage: ''
                 }
             } else {
                 return {
                     showDrawer: true,
                     budgetDrawer: false,
-                    giftDrawer: true
+                    giftDrawer: true,
+                    error: false,
+                    errorMessage: ''
                 }
             }
         },
-        UPDATE_BUDGET_VALUE: curState => {
-            let budgetInput = document.getElementById('budgetInput');
-            let value = budgetInput.value;
-            if (curState.budget !== value && value > 0) {
-                budgetInput.value = '';
-                value = actions.FORMAT_NUMBER(value);
+        UPDATE_BUDGET_VALUE: (curState, payload) => {
+            let value = payload.budgetInput;
+            if (curState.budget !== value) {
+                let value = actions.FORMAT_NUMBER(payload.budgetInput);
                 return { budgetValue: value};
             }
-            budgetInput.value = '';
         },
         FORMAT_NUMBER: num => {
             let numSplit, int, dec;
