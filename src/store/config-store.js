@@ -138,29 +138,24 @@ const configureStore = () => {
             }
         },
         UPDATE_GIFT_LIST: (curState, payload) => {
-            payload.forEach(cur => console.log(cur.id + ' ' + cur.who + ' ' + cur.what + ' ' + cur.where + ' ' + cur.price));
+            if (curState.giftList !== payload) {
+                return { giftList: payload}
+            }
         }
 
     }
-    
 
-    // const database = firebase.database();
-    // let bundle = database.ref(`toPurchase/555`).on('value', snapshot => {
-    //     let gifts = [];  
-    //     snapshot.forEach(childSnapshot => {
-    //         let newGift = {
-    //             id: childSnapshot.val().id,
-    //             who: childSnapshot.val().who,
-    //             what: childSnapshot.val().what,
-    //             where: childSnapshot.val().where,
-    //             price: childSnapshot.val().price
-    //         }
-    //         gifts.push(newGift);
-    //     })
-    //     return { giftList: gifts};
-    // });
-    
 
+        // const database = firebase.database();
+
+        // let newList = database.ref(`toPurchase/555`).once('value', snapshot => {
+        //     let giftList = [];
+        //     snapshot.forEach(childSnapshot => {
+        //         giftList.push(childSnapshot);
+        //     })
+        //     return giftList;
+        // }).then(val => console.log(val.val())).then(()=> console.log('another then!'))
+    
 
     initStore(actions, {
         budgetValue: '$1,200.00',
@@ -169,7 +164,7 @@ const configureStore = () => {
         giftDrawer: false,
         error: false,
         errorMessage: '',
-        giftList: null
+        giftList: []
     });
 }
 
