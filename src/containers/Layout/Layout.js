@@ -5,9 +5,9 @@ import classes from './Layout.module.css';
 const Layout = () => {
 
     return (
-        <React.Fragment className={classes.BackgroundImage}>
+        <div className={classes.BackgroundImage}>
             <Top />
-        </React.Fragment>
+        </div>
     );
 }
 

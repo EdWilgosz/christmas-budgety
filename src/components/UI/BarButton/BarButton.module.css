@@ -25,3 +25,9 @@
         font-size: 1.5rem;
     }
 }
+
+@media (min-width: 1200px) {
+    .BarButton {
+        font-size: 1.75rem;
+    }
+}

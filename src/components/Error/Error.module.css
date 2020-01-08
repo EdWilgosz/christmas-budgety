@@ -19,7 +19,19 @@
 @media(min-width: 600px) {
     .Error {
         width: 48%;
-        font-size: 0.95rem;
+        font-size: 1rem;
         padding: 0.6rem;
+    }
+}
+
+@media(min-width: 900px) {
+    .Error {
+        font-size: 1.25rem;
+    }
+}
+
+@media(min-width: 1200px) {
+    .Error {
+        font-size: 1.5rem;
     }
 }

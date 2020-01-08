@@ -6,10 +6,6 @@
     transition: transform 500ms;
 }
 
-.BudgetValueCont:hover {
-    transform: scale(1.1);
-}
-
 .BudgetValue {
     font-size: 1.5rem;
     color: #fff;
@@ -22,18 +18,24 @@
 
 @media (min-width: 400px) {
     .BudgetValue {
-        font-size: 1.75rem;
+        font-size: 2rem;
     }
 }
 
 @media (min-width: 600px) {
     .BudgetValue {
-        font-size: 2.5rem;
+        font-size: 2.75rem;
     }
 }
 
 @media (min-width: 900px) {
     .BudgetValue {
-        font-size: 3rem;
+        font-size: 3.75rem;
+        transform: scaleY(2.5);
+    }
+}
+@media (min-width: 1200px) {
+    .BudgetValue {
+        font-size: 4.5rem;
     }
 }

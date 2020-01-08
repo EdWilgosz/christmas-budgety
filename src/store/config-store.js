@@ -123,7 +123,7 @@ const configureStore = () => {
     }
 
     initStore(actions, {
-        budgetValue: '$0.00',
+        budgetValue: '$100,200.00',
         showDrawer: true,
         budgetDrawer: false,
         giftDrawer: true,

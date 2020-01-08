@@ -20,7 +20,23 @@
 @media(min-width: 600px) {
     .Input {
         width: 48%;
-        font-size: 1rem;
+        font-size: 1.1rem;
+        padding: 0.6rem;
+    }
+}
+
+@media(min-width: 900px) {
+    .Input {
+        width: 48%;
+        font-size: 1.25rem;
+        padding: 0.6rem;
+    }
+}
+
+@media(min-width: 1200px) {
+    .Input {
+        width: 48%;
+        font-size: 1.35rem;
         padding: 0.6rem;
     }
 }
