@@ -3,51 +3,13 @@ import { useStore } from '../../../store/store';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
+import GiftItem from '../../../components/UI/GiftItem/GiftItem';
+
 const ToPurchaseList = props => {
-
-    // const [state, dispatch] = useStore();
-    
-    // let giftList = [];
-    // let displayGifts = [];
-
-    // useEffect(() => {
-    //     const database = firebase.database();
-
-    //     let newList = database.ref(`toPurchase/555`).once('value', snapshot => {
-    //         snapshot.forEach(childSnapshot => {
-    //             let newGift = {
-    //                 id: childSnapshot.val().id,
-    //                 who: childSnapshot.val().who,
-    //                 what: childSnapshot.val().what,
-    //                 where: childSnapshot.val().where,
-    //                 price: childSnapshot.val().price
-    //             };
-    //             giftList.push(newGift);
-    //         })
-    //         return giftList;
-    //     })
-    //     .then(val => {
-    //         if (giftList !== state.giftList) {
-    //             // console.log(giftList)
-    //             dispatch('UPDATE_GIFT_LIST', giftList);
-    //             return giftList;
-    //         }
-    //     })
-    //     .then((giftList) => {
-    //         // console.log(giftList)
-    //         return displayGifts = giftList.map(gift => {
-    //             // console.log(gift);
-    //         return <div>{`${gift.id} ${gift.who} ${gift.where} ${gift.what} ${gift.price}`}</div>;
-    //         })
-
-    //     })
-
-    // }, []);
 
     const [state, dispatch] = useStore();
     
     let giftList = [];
-    let displayGifts = [];
 
     useEffect(() => {
         const database = firebase.database();
@@ -55,45 +17,28 @@ const ToPurchaseList = props => {
         let newList = database.ref(`toPurchase/555`).once('value', snapshot => {
             snapshot.forEach(childSnapshot => {
                 let id = childSnapshot.val().id;
-                let who = childSnapshot.val().who;
-                let what = childSnapshot.val().what;
-                let where = childSnapshot.val().where;
+                let who = childSnapshot.val().who.toUpperCase();
+                let what = childSnapshot.val().what.toUpperCase();;
+                let where = childSnapshot.val().where.toUpperCase();;
                 let price = childSnapshot.val().price;
-                let newGift = <div key={id} id={id}>{`${id} ${who} ${where} ${what} ${price}`}</div>;
+                // let newGift = <div key={id} id={id}>{`${who} ${where} ${what} ${price}`}</div>;
+                let newGift = <GiftItem key={id} id={id} who={who} what={what} where={where} price={price} />;
                 giftList.push(newGift);
             })
-            // console.log(giftList)
             return giftList;
         })
         .then(val => {
             if (giftList !== state.giftList) {
-                // console.log(giftList)
                 dispatch('UPDATE_GIFT_LIST', giftList);
                 return giftList;
             }
         })
-        // .then((giftList) => {
-        //     // console.log(giftList)
-        //     // return displayGifts = giftList.map(gift => {
-        //     //     // console.log(gift);
-        //     // return <div>{`${gift.id} ${gift.who} ${gift.where} ${gift.what} ${gift.price}`}</div>;
-        //     // })
-
-        // })
-
-    }, []);
-        
-    
-
-    let log = () => {
-        console.log(state.giftList);
-    }
+    }, [dispatch]);
 
     return (
         <div>
-        <h1>{state.giftList.map(cur => cur)}</h1>
-        <button onClick={log}>LOG</button>
-        
+            <GiftItem who={'EDDIE'} what={'A COFFEE WARMER'} where={'AMAZON.COM'} price={'$12.99'}/>
+            {state.giftList.map(cur => cur)}
         </div>
     );
 }

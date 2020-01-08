@@ -1,3 +1,4 @@
+// import React from 'react';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import { initStore } from './store';
@@ -111,9 +112,6 @@ const configureStore = () => {
             const userId = 555;
             // console.log(`${payload.who} ${payload.what} ${payload.where} ${actions.FORMAT_NUMBER(payload.price)}`);
             let toPurchase = database.ref(`toPurchase/${userId}`);
-            toPurchase.on('child_added', data => {
-                // console.log(data.val().id + ' ' + data.val().who + ' ' + data.val().what + ' ' + data.val().where + ' ' + data.val().price );
-            })
 
             let toPurchaseRef = toPurchase.push();
             toPurchaseRef.set({
@@ -122,7 +120,15 @@ const configureStore = () => {
                 what: payload.what,
                 where: payload.where,
                 price: actions.FORMAT_NUMBER(payload.price)
+            }, snap => {
+                console.log(snap)
             })
+
+            // toPurchase.on('child_added', data => {
+            //     let d = data.val();
+            //     let newGift = <div key={d.id} id={d.id}>{`${d.who} ${d.where} ${d.what} ${d.price}`}</div>;
+            //     return { giftList: [...curState.giftList, newGift]};
+            // });
             
         },
         ERROR_NUMBER_FORMAT: (curState, payload) => {
