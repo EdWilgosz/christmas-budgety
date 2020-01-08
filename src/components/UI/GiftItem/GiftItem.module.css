@@ -1,6 +1,6 @@
 .GiftItem {
     display: grid;
-    grid-template: auto auto / 1fr 1fr 10%;
+    grid-template: 1fr 1fr / 1fr 1fr 10%;
     width: 90%;
     margin: 0.75rem auto;
     padding: 0.5rem;
@@ -10,6 +10,7 @@
     background-color: rgba(108, 108, 106, 0.85);
     justify-content: center;
     border-radius: 5px;
+    align-items: center;
 }
 
 .Field {

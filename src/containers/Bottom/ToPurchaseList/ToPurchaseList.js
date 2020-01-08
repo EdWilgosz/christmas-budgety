@@ -2,7 +2,9 @@ import React, { useEffect } from 'react';
 import { useStore } from '../../../store/store';
 import firebase from 'firebase/app';
 import 'firebase/database';
+import classes from './ToPurchaseList.module.css';
 
+import GiftTitleBar from '../../../components/UI/GiftTitleBar/GiftTitleBar';
 import GiftItem from '../../../components/UI/GiftItem/GiftItem';
 
 const ToPurchaseList = props => {
@@ -36,8 +38,8 @@ const ToPurchaseList = props => {
     }, [dispatch]);
 
     return (
-        <div>
-            <GiftItem who={'EDDIE'} what={'A COFFEE WARMER'} where={'AMAZON.COM'} price={'$12.99'}/>
+        <div className={classes.ToPurchaseList}>
+            <GiftTitleBar />
             {state.giftList.map(cur => cur)}
         </div>
     );
