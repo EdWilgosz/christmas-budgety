@@ -5,10 +5,7 @@ const GiftTitleBar = props => {
 
     return (
         <div className={classes.GiftTitleBar}>
-            <div className={classes.Who}>WHO</div>
-            <div className={classes.What}>WHAT</div>
-            <div className={classes.Where}>WHERE</div>
-            <div className={classes.Price}>PRICE</div>
+            ALREADY BOUGHT
         </div>
     )
 }

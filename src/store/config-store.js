@@ -110,7 +110,6 @@ const configureStore = () => {
         ADD_GIFT: (curState, payload) => {
             const database = firebase.database();
             const userId = 555;
-            // console.log(`${payload.who} ${payload.what} ${payload.where} ${actions.FORMAT_NUMBER(payload.price)}`);
             let toPurchase = database.ref(`toPurchase/${userId}`);
 
             let toPurchaseRef = toPurchase.push();
@@ -120,16 +119,29 @@ const configureStore = () => {
                 what: payload.what,
                 where: payload.where,
                 price: actions.FORMAT_NUMBER(payload.price)
-            }, snap => {
-                console.log(snap)
             })
+        },
+        REMOVE_GIFT: (curState, payload) => {
+            const database = firebase.database();
+            const userId = 555;
+            let toPurchaseRef = database.ref(`toPurchase/${userId}/${payload}`);
+            toPurchaseRef.set(null);
+        },
+        CHECK_GIFT: (curState, payload) => {
+            const userId = 555;
+            const database = firebase.database();
+            let toPurchaseRef = database.ref(`toPurchase/${userId}/${payload.id}`);
+            toPurchaseRef.set(null);
 
-            // toPurchase.on('child_added', data => {
-            //     let d = data.val();
-            //     let newGift = <div key={d.id} id={d.id}>{`${d.who} ${d.where} ${d.what} ${d.price}`}</div>;
-            //     return { giftList: [...curState.giftList, newGift]};
-            // });
-            
+            let purchased = database.ref(`purchased/${userId}`);
+            let purchasedRef = purchased.push();
+            purchasedRef.set({
+                id: purchasedRef.key,
+                who: payload.who,
+                what: payload.what,
+                where: payload.where,
+                price: payload.price
+            })
         },
         ERROR_NUMBER_FORMAT: (curState, payload) => {
             return {
@@ -146,6 +158,11 @@ const configureStore = () => {
         UPDATE_GIFT_LIST: (curState, payload) => {
             if (curState.giftList !== payload) {
                 return { giftList: payload}
+            }
+        },
+        UPDATE_BOUGHT_LIST: (curState, payload) => {
+            if (curState.boughtList !== payload) {
+                return { boughtList: payload}
             }
         }
 
@@ -170,7 +187,8 @@ const configureStore = () => {
         giftDrawer: false,
         error: false,
         errorMessage: '',
-        giftList: []
+        giftList: [],
+        boughtList: []
     });
 }
 
