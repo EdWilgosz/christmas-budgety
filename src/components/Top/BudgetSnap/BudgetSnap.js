@@ -1,13 +1,21 @@
 import React from 'react';
+import { useStore, FORMAT_NUMBER } from '../../../store/store';
 import classes from './BudgetSnap.module.css';
 
+
 const BudgetSnap = props => {
+
+    const state = useStore()[0];
+    const spentValue = FORMAT_NUMBER(state.spentValue);
+    const toSpendValue = FORMAT_NUMBER(state.toSpendValue);
+    const spentPerc = state.spentPerc;
+    const toSpendPerc = state.toSpendPerc;
 
     let type = props.type === 'spent';
     let contType = [type ? classes.Spent : classes.ToSpend, classes.Cont].join(' ');
     let textType = type ? 'ALREADY SPENT' : 'LEFT TO SPEND';
-    let valType = type ? '$567.98' : '$456.78';
-    let percType = type ? '54%' : '46%';
+    let valType = type ? spentValue : toSpendValue;
+    let percType = type ? `${spentPerc}%` : `${toSpendPerc}%`;
 
     return (
         <div className={contType}>

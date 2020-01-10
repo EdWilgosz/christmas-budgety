@@ -48,17 +48,19 @@ const configureStore = () => {
             let value = payload.budgetInput;
             if (curState.budget !== value) {
                 let value = payload.budgetInput;
+                const database = firebase.database();
+                const userId = 555;
+                let budgetValueRef = database.ref(`${userId}/budget/budgetValue`);
+
+                // let budgetValueRef = toPurchase.push();
+                budgetValueRef.set({
+                    value
+                });
+
                 return { budgetValue: value};
             }
 
-            const database = firebase.database();
-            const userId = 555;
-            let budgetValueRef = database.ref(`${userId}/budget/budgetValue`);
-
-            // let budgetValueRef = toPurchase.push();
-            budgetValueRef.set({
-                value
-            })
+            
         },
         ADD_GIFT: (curState, payload) => {
             const database = firebase.database();
@@ -131,9 +133,12 @@ const configureStore = () => {
             }
         },
         UPDATE_LISTS: (curState, payload) => {
-            // console.log(payload)
                 return { 
                     budgetValue: payload[2],
+                    spentValue: payload[3],
+                    toSpendValue: payload[4],
+                    spentPerc: payload[5],
+                    toSpendPerc: payload[6],
                     giftList: payload[0],
                     boughtList: payload[1]
                 } 
@@ -141,7 +146,11 @@ const configureStore = () => {
     }    
 
     initStore(actions, {
-        budgetValue: '$1,200.00',
+        budgetValue: 0.00,
+        spentValue: 0.00,
+        toSpendValue: 0.00,
+        spentPerc: 0,
+        toSpendPerc: 0,
         showDrawer: false,
         budgetDrawer: false,
         giftDrawer: false,
