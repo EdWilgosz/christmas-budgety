@@ -10,7 +10,7 @@ const GiftItem = props => {
             <div className={[classes.Where, classes.Field].join(' ')}>{props.where}</div>
             <div className={[classes.Price, classes.Field].join(' ')}>{props.price}</div>
             <div className={[classes.Checked, classes.Icon].join(' ')} onClick={props.check}><i className="far fa-check-circle"></i></div>
-            <div className={[classes.Delete, classes.Icon].join(' ')} onClick={props.delete}><i className="far fa-times-circle"></i></div>
+            <div className={[classes.Delete, classes.Icon].join(' ')} onClick={props.removeGift}><i className="far fa-times-circle"></i></div>
         </div>
     );
 }

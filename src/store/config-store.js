@@ -4,7 +4,6 @@ import 'firebase/database';
 import { initStore } from './store';
 
 
-
 const configureStore = () => {
     const actions = {
         TOGGLE_BUDGET_DRAWER: curState => {
@@ -110,7 +109,7 @@ const configureStore = () => {
         ADD_GIFT: (curState, payload) => {
             const database = firebase.database();
             const userId = 555;
-            let toPurchase = database.ref(`toPurchase/${userId}`);
+            let toPurchase = database.ref(`${userId}/toPurchase`);
 
             let toPurchaseRef = toPurchase.push();
             toPurchaseRef.set({
@@ -124,19 +123,41 @@ const configureStore = () => {
         REMOVE_GIFT: (curState, payload) => {
             const database = firebase.database();
             const userId = 555;
-            let toPurchaseRef = database.ref(`toPurchase/${userId}/${payload}`);
+            let toPurchaseRef = database.ref(`${userId}/toPurchase/${payload}`);
             toPurchaseRef.set(null);
+        },
+        REMOVE_BOUGHT_ITEM: (curState, payload) => {
+            const database = firebase.database();
+            const userId = 555;
+            let purchasedRef = database.ref(`${userId}/purchased/${payload}`);
+            purchasedRef.set(null);
         },
         CHECK_GIFT: (curState, payload) => {
             const userId = 555;
             const database = firebase.database();
-            let toPurchaseRef = database.ref(`toPurchase/${userId}/${payload.id}`);
+            let toPurchaseRef = database.ref(`${userId}/toPurchase/${payload.id}`);
             toPurchaseRef.set(null);
 
-            let purchased = database.ref(`purchased/${userId}`);
+            let purchased = database.ref(`${userId}/purchased`);
             let purchasedRef = purchased.push();
             purchasedRef.set({
                 id: purchasedRef.key,
+                who: payload.who,
+                what: payload.what,
+                where: payload.where,
+                price: payload.price
+            })
+        },
+        UNCHECK_GIFT: (curState, payload) => {
+            const userId = 555;
+            const database = firebase.database();
+            let purchasedRef = database.ref(`${userId}/purchased/${payload.id}`);
+            purchasedRef.set(null);
+
+            let toPurchase = database.ref(`${userId}/toPurchase`);
+            let toPurchaseRef = toPurchase.push();
+            toPurchaseRef.set({
+                id: toPurchaseRef.key,
                 who: payload.who,
                 what: payload.what,
                 where: payload.where,
@@ -155,30 +176,14 @@ const configureStore = () => {
                 errorMessage: payload.errorMessage
             }
         },
-        UPDATE_GIFT_LIST: (curState, payload) => {
-            if (curState.giftList !== payload) {
-                return { giftList: payload}
-            }
-        },
-        UPDATE_BOUGHT_LIST: (curState, payload) => {
-            if (curState.boughtList !== payload) {
-                return { boughtList: payload}
+        UPDATE_LISTS: (curState, payload) => {
+            if (curState.giftList !== payload[0] || curState.boughtList !== payload[1]) {
+                return { giftList: payload[0],
+                        boughtList: payload[1]
+                } 
             }
         }
-
-    }
-
-
-        // const database = firebase.database();
-
-        // let newList = database.ref(`toPurchase/555`).once('value', snapshot => {
-        //     let giftList = [];
-        //     snapshot.forEach(childSnapshot => {
-        //         giftList.push(childSnapshot);
-        //     })
-        //     return giftList;
-        // }).then(val => console.log(val.val())).then(()=> console.log('another then!'))
-    
+    }    
 
     initStore(actions, {
         budgetValue: '$1,200.00',
