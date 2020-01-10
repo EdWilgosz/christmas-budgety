@@ -1,5 +1,5 @@
 import React from 'react';
-import { useStore } from '../../store/store';
+import { useStore, FORMAT_NUMBER } from '../../store/store';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
@@ -13,10 +13,11 @@ const Bottom = props => {
 
     const database = firebase.database();
 
-    let update = database.ref('555').once('value', snapshot => snapshot)
-        let updated = update.then(snapshot => {
+    database.ref('555').once('value', snapshot => snapshot)
+        .then(snapshot => {
             let giftList = [];
             let boughtList = [];
+            let budgetValue;
             if(snapshot.val()) {
             let toPurchase = snapshot.val().toPurchase;
             let purchased = snapshot.val().purchased;
@@ -38,12 +39,14 @@ const Bottom = props => {
                 let boughtGift = [id, who, what, where, price];
                 boughtList.push(boughtGift);
             }
+            budgetValue = snapshot.val().budget.budgetValue;
         }
-            return [giftList, boughtList];
+            
+            return [giftList, boughtList, budgetValue];
         })
         .then(val => {
             if(state.giftList.toString() !== val[0].toString() || state.boughtList.toString() !== val[1].toString()) {
-                dispatch('UPDATE_LISTS', [val[0], val[1]]);
+                dispatch('UPDATE_LISTS', [val[0], val[1], val[2]]);
             } 
         })
 
@@ -86,8 +89,8 @@ const Bottom = props => {
 
     }
 
-    let gifts = state.giftList.map(cur => <GiftItem key={cur[0]} id={cur[0]} who={cur[1]} what={cur[2]} where={cur[3]} price={cur[4]} check={e=>check(e)} removeGift={e=>remove(e)}/>);
-    let boughtGifts = state.boughtList.map(cur => <BoughtItem key={cur[0]} id={cur[0]} who={cur[1]} what={cur[2]} where={cur[3]} price={cur[4]} uncheck={e=>uncheck(e)} removeBoughtItem={e=>removeBoughtItem(e)}/>);
+    let gifts = state.giftList.map(cur => <GiftItem key={cur[0]} id={cur[0]} who={cur[1]} what={cur[2]} where={cur[3]} price={FORMAT_NUMBER(cur[4])} check={e=>check(e)} removeGift={e=>remove(e)}/>);
+    let boughtGifts = state.boughtList.map(cur => <BoughtItem key={cur[0]} id={cur[0]} who={cur[1]} what={cur[2]} where={cur[3]} price={FORMAT_NUMBER(cur[4])} uncheck={e=>uncheck(e)} removeBoughtItem={e=>removeBoughtItem(e)}/>);
     let titleBar = state.boughtList.length > 0 ? <GiftTitleBar /> : null
 
     return (

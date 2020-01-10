@@ -47,64 +47,18 @@ const configureStore = () => {
         UPDATE_BUDGET_VALUE: (curState, payload) => {
             let value = payload.budgetInput;
             if (curState.budget !== value) {
-                let value = actions.FORMAT_NUMBER(payload.budgetInput);
+                let value = payload.budgetInput;
                 return { budgetValue: value};
             }
-        },
-        FORMAT_NUMBER: num => {
-            let numSplit, int, dec;
-    
-            if (num > 0) {
-    
-                num = Math.abs(num);
-                num = num.toFixed(2);
-    
-                numSplit = num.split('.');
-    
-                int = numSplit[0];
-    
-    
-                if (int.length < 13) {
-                    switch(int.length) {
-                        case 12:
-                                int = (int.substr(0, int.length - 9) + ',' + int.substr(int.length -9, 3) + ',' + int.substr(int.length -6, 3) + ',' + int.substr(int.length - 3, 3));
-                                break;
-                        case 11:
-                                int = ((int.substr(0, int.length - 9) + ',' + int.substr(int.length -9, 3) + ',' + int.substr(int.length -6, 3) + ',' + int.substr(int.length - 3, 3)));
-                                break;
-                        case 10:
-                                int = ((int.substr(0, int.length - 9) + ',' + int.substr(int.length -9, 3) + ',' + int.substr(int.length -6, 3) + ',' + int.substr(int.length - 3, 3)));
-                                break;
-                        case 9:
-                                int = (int.substr(0, int.length - 6) + ',' + int.substr(int.length -6, 3) + ',' + int.substr(int.length - 3, 3));
-                                break;
-                        case 8:
-                                int = (int.substr(0, int.length - 6) + ',' + int.substr(int.length -6, 3) + ',' + int.substr(int.length - 3, 3));
-                                break;
-                        case 7:
-                                int = (int.substr(0, int.length - 6) + ',' + int.substr(int.length -6, 3) + ',' + int.substr(int.length - 3, 3));
-                                break;
-                        case 6: int = (int.substr(0, int.length - 3) + ',' + int.substr(int.length - 3, 3));
-                                break;
-                        case 5: int = (int.substr(0, int.length - 3) + ',' + int.substr(int.length - 3, 3));
-                                break;
-                        case 4: int = (int.substr(0, int.length - 3) + ',' + int.substr(int.length - 3, 3));
-                                break;
-                        default: int = numSplit[0];
-                                break;
-                    }
-                } else {
-                    int = 'YOUNEEDABIGGERCALCULATOR';
-                }
-    
-                dec = numSplit[1];
-    
-            } else {
-                int = '-';
-                dec = '--';
-            }
-            
-            return '$' + int + '.' + dec;
+
+            const database = firebase.database();
+            const userId = 555;
+            let budgetValueRef = database.ref(`${userId}/budget/budgetValue`);
+
+            // let budgetValueRef = toPurchase.push();
+            budgetValueRef.set({
+                value
+            })
         },
         ADD_GIFT: (curState, payload) => {
             const database = firebase.database();
@@ -117,7 +71,7 @@ const configureStore = () => {
                 who: payload.who,
                 what: payload.what,
                 where: payload.where,
-                price: actions.FORMAT_NUMBER(payload.price)
+                price: payload.price
             })
         },
         REMOVE_GIFT: (curState, payload) => {
@@ -177,11 +131,12 @@ const configureStore = () => {
             }
         },
         UPDATE_LISTS: (curState, payload) => {
-            if (curState.giftList !== payload[0] || curState.boughtList !== payload[1]) {
-                return { giftList: payload[0],
-                        boughtList: payload[1]
+            // console.log(payload)
+                return { 
+                    budgetValue: payload[2],
+                    giftList: payload[0],
+                    boughtList: payload[1]
                 } 
-            }
         }
     }    
 
