@@ -2,7 +2,7 @@ import React from 'react';
 import { useStore } from '../../store/store';
 import BudgetCont from '../BudgetCont/BudgetCont';
 import ButtonBar from '../../components/UI/ButtonBar/ButtonBar';
-import InputDrawer from '../../components/UI/InputDrawer/InputDrawer';
+import InputDrawer from '../InputDrawer/InputDrawer';
 
 const Top = props => {
 

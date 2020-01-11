@@ -1,8 +1,8 @@
 import React from 'react';
-import { useStore } from '../../../store/store';
-import Input from '../Input/Input';
-import SubmitButton from '../SubmitButton/SubmitButton';
-import Error from '../../Error/Error';
+import { useStore } from '../../store/store';
+import Input from '../../components/UI/Input/Input';
+import SubmitButton from '../../components/UI/SubmitButton/SubmitButton';
+import Error from '../../components/Error/Error';
 import classes from './InputDrawer.module.css';
 
 
