@@ -8,8 +8,8 @@ const BudgetSnap = props => {
     const state = useStore()[0];
     const spentValue = FORMAT_NUMBER(state.spentValue);
     const toSpendValue = FORMAT_NUMBER(state.toSpendValue);
-    const spentPerc = state.spentPerc;
-    const toSpendPerc = state.toSpendPerc;
+    const spentPerc = state.spentPerc < 1 ? '--' : state.spentPerc > 100 ? '100' : state.spentPerc;
+    const toSpendPerc = state.toSpendPerc > 0 ? state.toSpendPerc : '--';
 
     let type = props.type === 'spent';
     let contType = [type ? classes.Spent : classes.ToSpend, classes.Cont].join(' ');
