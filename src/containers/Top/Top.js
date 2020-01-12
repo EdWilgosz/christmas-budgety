@@ -4,20 +4,23 @@ import BudgetCont from '../BudgetCont/BudgetCont';
 import ButtonBar from '../../components/UI/ButtonBar/ButtonBar';
 import InputDrawer from '../InputDrawer/InputDrawer';
 
-const Top = props => {
 
-    const state = useStore()[0];
+    const Top = props => {
+        
+        const state = useStore()[0];
 
-    let inputDrawer = () => {
-        if (!state.showDrawer) {
-            return null;
-        } else if (state.showDrawer && state.budgetDrawer) {
-            return <InputDrawer type='budget' />;
-        } else if (state.showDrawer && state.giftDrawer) {
-            return <InputDrawer type='gift' />
-        }
+        let inputDrawer = () => {
+            if (!state.showDrawer) {
+                return null;
+            } else if (state.showDrawer && !state.isLoggedIn) {
+                return <InputDrawer inputType='login' />;
+            } else if (state.showDrawer && state.budgetDrawer) {
+                return <InputDrawer inputType='budget' />;
+            } else if (state.showDrawer && state.giftDrawer) {
+                return <InputDrawer inputType='gift' />
+            }
+
     }
-
 
     return (
         <React.Fragment>

@@ -1,17 +1,20 @@
 import React from 'react';
 import { useStore } from '../../store/store';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+
 import Input from '../../components/UI/Input/Input';
 import SubmitButton from '../../components/UI/SubmitButton/SubmitButton';
 import Error from '../../components/Error/Error';
 import classes from './InputDrawer.module.css';
 
-
 const InputDrawer = props => {
 
     const [state, dispatch] = useStore();
 
-    let submitHandler = () => {
-        if (props.type === 'budget') {
+    let submitHandler = e => {
+        e.preventDefault();
+        if (props.inputType === 'budget') {
             let budgetInput = document.getElementById('budgetInput');
             let value = budgetInput.value;
             if (value > 0) {
@@ -22,7 +25,7 @@ const InputDrawer = props => {
                 let payload = { errorMessage: 'please enter a valid usd price format (example: 12.00 or 12)' };
                 dispatch('ERROR_NUMBER_FORMAT', payload);
             }
-        } else if (props.type === 'gift') {
+        } else if (props.inputType === 'gift') {
             let who = document.getElementById('whoInput');
             let what = document.getElementById('whatInput');
             let where = document.getElementById('whereInput');
@@ -52,24 +55,78 @@ const InputDrawer = props => {
         }
     }
 
+    let createAccount = e => {
 
-    let inputs = props.type === 'budget' ? 
-        <div className={classes.InputDrawer}>
-            <Input placeholder={'Enter budget'} type="budgetInput" />
-            <div className={classes.Break} />
-            {state.error ? <Error errorMessage={state.errorMessage} /> : null }
-            <div className={classes.Break} />
-            <SubmitButton type={props.type} clicked={submitHandler} /> 
-        </div> : 
-        <div className={classes.InputDrawer}>
-            <Input placeholder={'Who\'s it for?'} type="whoInput" />
-            <Input placeholder={'What is it?'} type="whatInput"/>
-            <Input placeholder={'Where to get it?'} type="whereInput" />
-            <Input placeholder={'How much is it?'}  type="priceInput"/>
-            {state.error ? <Error errorMessage={state.errorMessage}/> : null }
-            <div className={classes.Break} />
-            <SubmitButton type={props.type} clicked={submitHandler} />
-        </div>;
+    }
+
+    let login = e => {
+        e.preventDefault();
+        let email = document.getElementById('emailInput');
+        let password = document.getElementById('passwordInput');
+      firebase.auth().signInWithEmailAndPassword(email.value, password.value)
+      .then(() => {
+        email.value = '';
+        password.value = '';
+      })
+      .catch(error => {
+        // let loginTitle = document.getElementById('logintitle');
+        // loginTitle.style.fontSize = '1.5rem';
+        // loginTitle.innerHTML = error.message;
+          email.value = '';
+          password.value = '';
+      });
+    }
+
+    let toggleCreateAccount = e => {
+        e.preventDefault();
+        dispatch('TOGGLE_LOGIN_CREATE_ACCOUNT');
+    }
+
+    let loginForm = state.login ? <div className={classes.InputDrawer}>
+                        <div className={classes.TitleBar}>Please login to continue</div>
+                        <Input type={'email'} placeholder={'Enter your email'} inputType="emailInput"/>
+                            <div className={classes.Break}></div>
+                        <Input type={'password'} placeholder={'Enter your password'} inputType="passwordInput"/>
+                            <div className={classes.Break}></div>
+                        <SubmitButton inputType="login" clicked={e=>login(e)} /> 
+                            <div className={classes.Or} style={{padding: '0.1rem'}}>or</div>
+                        <SubmitButton inputType="createAccount" clicked={e=>toggleCreateAccount(e)} /> 
+                    </div> 
+                    :
+                    <div className={classes.InputDrawer}>
+                        <div className={classes.TitleBar}>Please create an account to continue</div>
+                        <Input type={'email'} placeholder={'Enter your email'} inputType="emailInput"/>
+                            <div className={classes.Break}></div>
+                        <Input type={'password'} placeholder={'Enter a new password'} inputType="passwordInput"/>
+                            <div className={classes.Break}></div>
+                        <SubmitButton inputType="createAccount" clicked={e=>createAccount(e)} /> 
+                            <div className={classes.Or} style={{padding: '0.1rem'}}>or</div>
+                        <SubmitButton inputType="login" clicked={e=>toggleCreateAccount(e)} /> 
+                    </div>;
+    
+    let inputs = props.inputType === 'login' ? 
+            loginForm :
+                    props.inputType === 'budget' ? 
+                        <div className={classes.InputDrawer}>
+                            <Input type={'text'} placeholder={'Enter budget'} inputType="budgetInput"/>
+                            <div className={classes.Break} />
+                            {state.error ? <Error errorMessage={state.errorMessage} /> : null }
+                            <div className={classes.Break} />
+                            <SubmitButton inputType={props.inputType} clicked={e=>submitHandler(e)} /> 
+                        </div> : 
+                        <div className={classes.InputDrawer}>
+                            <Input type={'text'} placeholder={'Who\'s it for?'} inputType="whoInput" />
+                            <Input type={'text'} placeholder={'What is it?'} inputType="whatInput"/>
+                            <Input type={'text'} placeholder={'Where to get it?'} inputType="whereInput" />
+                            <Input type={'text'} placeholder={'How much is it?'}  inputType="priceInput"/>
+                            {state.error ? <Error errorMessage={state.errorMessage}/> : null }
+                            <div className={classes.Break} />
+                            <SubmitButton inputType={props.inputType} clicked={e=>submitHandler(e)} />
+                        </div>;
+
+    
+
+
 
 
     return inputs;

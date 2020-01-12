@@ -6,8 +6,8 @@ const ButtonBar = props => {
 
     return (
         <div className={classes.ButtonBar}>
-            <BarButton type="budget" />
-            <BarButton type="addgift" />
+            <BarButton inputType="budget" />
+            <BarButton inputType="addgift" />
         </div>     
     );
 }

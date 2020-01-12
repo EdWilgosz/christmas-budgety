@@ -1,0 +1,25 @@
+[debug] [2020-01-11T15:45:39.758Z] ----------------------------------------------------------------------
+[debug] [2020-01-11T15:45:39.760Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\eddie\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2020-01-11T15:45:39.760Z] CLI Version:   7.11.0
+[debug] [2020-01-11T15:45:39.760Z] Platform:      win32
+[debug] [2020-01-11T15:45:39.760Z] Node Version:  v10.16.0
+[debug] [2020-01-11T15:45:39.761Z] Time:          Sat Jan 11 2020 10:45:39 GMT-0500 (Eastern Standard Time)
+[debug] [2020-01-11T15:45:39.761Z] ----------------------------------------------------------------------
+[debug] [2020-01-11T15:45:39.761Z] 
+[debug] [2020-01-11T15:45:39.774Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-01-11T15:45:39.775Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\eddie\Documents\Christmas_Budgety\christmas-budgety
+
+Before we get started, keep in mind:
+
+  * You are initializing in an existing Firebase project directory
+

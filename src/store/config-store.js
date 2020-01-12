@@ -4,6 +4,9 @@ import 'firebase/database';
 import { initStore } from './store';
 
 
+import 'firebase/auth';
+
+
 const configureStore = () => {
     const actions = {
         TOGGLE_BUDGET_DRAWER: curState => {
@@ -41,6 +44,31 @@ const configureStore = () => {
                     giftDrawer: true,
                     error: false,
                     errorMessage: ''
+                }
+            }
+        },
+        TOGGLE_LOGIN: curState => {
+            if (curState.showDrawer) {
+                return {
+                    showDrawer: false,
+                    budgetDrawer: false,
+                    giftDrawer: false,
+                    error: false,
+                    errorMessage: '',
+                    sentAuth: true
+                }
+            } else {
+                // if (!curState.sentAuth) {
+                //     const ui = new firebaseui.auth.AuthUI(firebase.auth());
+                //     ui.start('#firebaseui-auth-container', uiConfig);
+                // }
+                return {
+                    showDrawer: true,
+                    budgetDrawer: false,
+                    giftDrawer: false,
+                    error: false,
+                    errorMessage: '',
+                    sentAuth: true
                 }
             }
         },
@@ -133,15 +161,20 @@ const configureStore = () => {
             }
         },
         UPDATE_LISTS: (curState, payload) => {
-                return { 
-                    budgetValue: payload[2],
-                    spentValue: payload[3],
-                    toSpendValue: payload[4],
-                    spentPerc: payload[5],
-                    toSpendPerc: payload[6],
-                    giftList: payload[0],
-                    boughtList: payload[1]
-                } 
+            return { 
+                budgetValue: payload[2],
+                spentValue: payload[3],
+                toSpendValue: payload[4],
+                spentPerc: payload[5],
+                toSpendPerc: payload[6],
+                giftList: payload[0],
+                boughtList: payload[1]
+            } 
+        },
+        TOGGLE_LOGIN_CREATE_ACCOUNT: (curState, payload) => {
+            return {
+                login: !curState.login
+            }
         }
     }    
 
@@ -157,7 +190,9 @@ const configureStore = () => {
         error: false,
         errorMessage: '',
         giftList: [],
-        boughtList: []
+        boughtList: [],
+        login: true,
+        isLoggedIn: false
     });
 }
 

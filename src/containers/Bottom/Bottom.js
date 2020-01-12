@@ -11,54 +11,56 @@ const Bottom = props => {
 
     const [state, dispatch] = useStore();
 
-    const database = firebase.database();
+    if (state.isLoggedIn) {
+        const database = firebase.database();
 
-    database.ref('555').once('value', snapshot => snapshot)
-        .then(snapshot => {
-            let giftList = [];
-            let boughtList = [];
-            let budgetValue;
-            let toSpendValue = 0;
-            let spentValue = 0;
-            let toSpendPerc;
-            let spentPerc;
-            if(snapshot.val()) {
-            let toPurchase = snapshot.val().toPurchase;
-            let purchased = snapshot.val().purchased;
-            for (let each in toPurchase) {
-                let id = toPurchase[each].id;
-                let who = toPurchase[each].who.toUpperCase();
-                let what = toPurchase[each].what.toUpperCase();
-                let where = toPurchase[each].where.toUpperCase();
-                let price = toPurchase[each].price;
-                let newGift = [id, who, what, where, price];
-                giftList.push(newGift);
-                spentValue = parseFloat(spentValue) + parseFloat(price);
+        database.ref('555').once('value', snapshot => snapshot)
+            .then(snapshot => {
+                let giftList = [];
+                let boughtList = [];
+                let budgetValue;
+                let toSpendValue = 0;
+                let spentValue = 0;
+                let toSpendPerc;
+                let spentPerc;
+                if(snapshot.val()) {
+                let toPurchase = snapshot.val().toPurchase;
+                let purchased = snapshot.val().purchased;
+                for (let each in toPurchase) {
+                    let id = toPurchase[each].id;
+                    let who = toPurchase[each].who.toUpperCase();
+                    let what = toPurchase[each].what.toUpperCase();
+                    let where = toPurchase[each].where.toUpperCase();
+                    let price = toPurchase[each].price;
+                    let newGift = [id, who, what, where, price];
+                    giftList.push(newGift);
+                    spentValue = parseFloat(spentValue) + parseFloat(price);
+                }
+                for (let each in purchased) {
+                    let id = purchased[each].id;
+                    let who = purchased[each].who.toUpperCase();
+                    let what = purchased[each].what.toUpperCase();
+                    let where = purchased[each].where.toUpperCase();
+                    let price = purchased[each].price;
+                    let boughtGift = [id, who, what, where, price];
+                    boughtList.push(boughtGift);
+                    spentValue = parseFloat(spentValue) + parseFloat(price);
+                }
+                budgetValue = parseFloat(snapshot.val().budget.budgetValue.value);
+                toSpendValue = budgetValue - spentValue;
+                spentPerc = Math.round((spentValue / budgetValue) * 100);
+                toSpendPerc = Math.round((toSpendValue / budgetValue)*100);
+
+
             }
-            for (let each in purchased) {
-                let id = purchased[each].id;
-                let who = purchased[each].who.toUpperCase();
-                let what = purchased[each].what.toUpperCase();
-                let where = purchased[each].where.toUpperCase();
-                let price = purchased[each].price;
-                let boughtGift = [id, who, what, where, price];
-                boughtList.push(boughtGift);
-                spentValue = parseFloat(spentValue) + parseFloat(price);
-            }
-            budgetValue = parseFloat(snapshot.val().budget.budgetValue.value);
-            toSpendValue = budgetValue - spentValue;
-            spentPerc = Math.round((spentValue / budgetValue) * 100);
-            toSpendPerc = Math.round((toSpendValue / budgetValue)*100);
-
-
+                return [giftList, boughtList, budgetValue, spentValue, toSpendValue, spentPerc, toSpendPerc];
+            })
+            .then(val => {
+                if(state.giftList.toString() !== val[0].toString() || state.boughtList.toString() !== val[1].toString() || state.budgetValue !== val[2]) {
+                    dispatch('UPDATE_LISTS', [val[0], val[1], val[2], val[3], val[4], val[5], val[6]]);
+                } 
+            })
         }
-            return [giftList, boughtList, budgetValue, spentValue, toSpendValue, spentPerc, toSpendPerc];
-        })
-        .then(val => {
-            if(state.giftList.toString() !== val[0].toString() || state.boughtList.toString() !== val[1].toString() || state.budgetValue !== val[2]) {
-                dispatch('UPDATE_LISTS', [val[0], val[1], val[2], val[3], val[4], val[5], val[6]]);
-            } 
-        })
 
         
 
@@ -70,7 +72,8 @@ const Bottom = props => {
             who: selected[0][1],
             what: selected[0][2],
             where: selected[0][3],
-            price: selected[0][4]
+            price: selected[0][4],
+            isLoggedIn: false
         }
         dispatch('CHECK_GIFT', payload);
     }
