@@ -1,11 +1,8 @@
 // import React from 'react';
 import firebase from 'firebase/app';
 import 'firebase/database';
-import { initStore } from './store';
-
-
 import 'firebase/auth';
-
+import { initStore } from './store';
 
 const configureStore = () => {
     const actions = {
@@ -58,10 +55,6 @@ const configureStore = () => {
                     sentAuth: true
                 }
             } else {
-                // if (!curState.sentAuth) {
-                //     const ui = new firebaseui.auth.AuthUI(firebase.auth());
-                //     ui.start('#firebaseui-auth-container', uiConfig);
-                // }
                 return {
                     showDrawer: true,
                     budgetDrawer: false,
@@ -160,6 +153,12 @@ const configureStore = () => {
                 errorMessage: payload.errorMessage
             }
         },
+        ERROR_LOGIN: (curState, payload) => {
+            return {
+                error: true,
+                errorMessage: payload
+            }
+        },
         UPDATE_LISTS: (curState, payload) => {
             return { 
                 budgetValue: payload[2],
@@ -173,8 +172,42 @@ const configureStore = () => {
         },
         TOGGLE_LOGIN_CREATE_ACCOUNT: (curState, payload) => {
             return {
-                login: !curState.login
+                login: !curState.login,
+                error: false,
+                errorMessage: ''
             }
+        },
+        LOGGED_IN: (curState, payload) => {
+            if (curState.userId !== payload) {
+                return {
+                error: false,
+                errorMessage: '',
+                isLoggedIn: true,
+                userId: payload,
+                showDrawer: false
+                }
+            } 
+        },
+        LOGGED_OUT: (curState, payload) => {
+            if (curState.isLoggedIn) {
+                return {
+                    budgetValue: 0.00,
+                    spentValue: 0.00,
+                    toSpendValue: 0.00,
+                    spentPerc: 0,
+                    toSpendPerc: 0,
+                    showDrawer: false,
+                    budgetDrawer: false,
+                    giftDrawer: false,
+                    error: false,
+                    errorMessage: '',
+                    giftList: [],
+                    boughtList: [],
+                    login: true,
+                    isLoggedIn: false,
+                    userId: null
+                }
+            }    
         }
     }    
 
@@ -192,7 +225,8 @@ const configureStore = () => {
         giftList: [],
         boughtList: [],
         login: true,
-        isLoggedIn: false
+        isLoggedIn: false,
+        userId: null
     });
 }
 
