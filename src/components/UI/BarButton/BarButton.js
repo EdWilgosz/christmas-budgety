@@ -6,7 +6,10 @@ const BarButton = props => {
 
     const [state, dispatch] = useStore();
     
-    const toggleDrawer = () => !state.isLoggedIn ? dispatch('TOGGLE_LOGIN') : props.inputType === 'budget' ? dispatch('TOGGLE_BUDGET_DRAWER') : dispatch('TOGGLE_GIFT_DRAWER');
+    const toggleDrawer = () => !state.isLoggedIn && props.inputType === 'budget' ? dispatch('TOGGLE_LOGIN_BUDGET') : 
+        !state.isLoggedIn && props.inputType === 'addgift' ? dispatch('TOGGLE_LOGIN_GIFT') :
+            props.inputType === 'budget' && state.isLoggedIn ? dispatch('TOGGLE_BUDGET_DRAWER') : 
+                props.inputType === 'addgift' && state.isLoggedIn ? dispatch('TOGGLE_GIFT_DRAWER') : null;
     // const toggleDrawer = () => !state.isLoggedIn ? dispatch('TOGGLE_LOGIN') : props.type === 'budget' ? dispatch('TOGGLE_BUDGET_DRAWER') : dispatch('TOGGLE_GIFT_DRAWER');
 
     let type = props.inputType === 'budget';

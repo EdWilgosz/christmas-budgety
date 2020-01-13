@@ -80,6 +80,9 @@ const InputDrawer = props => {
         .then(() => {
             email.value = '';
             password.value = '';
+            setTimeout(() => {
+                firebase.auth().signOut();
+            }, 1800 * 1000);
         })
         .catch(error => {
             email.value = '';

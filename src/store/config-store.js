@@ -44,24 +44,60 @@ const configureStore = () => {
                 }
             }
         },
-        TOGGLE_LOGIN: curState => {
+        // TOGGLE_LOGIN: curState => {
+        //     if (curState.showDrawer) {
+        //         return {
+        //             showDrawer: false,
+        //             // budgetDrawer: false,
+        //             // giftDrawer: false,
+        //             error: false,
+        //             errorMessage: ''
+        //         }
+        //     } else {
+        //         return {
+        //             showDrawer: true,
+        //             // budgetDrawer: false,
+        //             // giftDrawer: false,
+        //             error: false,
+        //             errorMessage: ''
+        //         }
+        //     }
+        // },
+        TOGGLE_LOGIN_BUDGET: curState => {
             if (curState.showDrawer) {
                 return {
                     showDrawer: false,
                     budgetDrawer: false,
                     giftDrawer: false,
                     error: false,
-                    errorMessage: '',
-                    sentAuth: true
+                    errorMessage: ''
+                }
+            } else {
+                return {
+                    showDrawer: true,
+                    budgetDrawer: true,
+                    giftDrawer: false,
+                    error: false,
+                    errorMessage: ''
+                }
+            }
+        },
+        TOGGLE_LOGIN_GIFT: curState => {
+            if (curState.showDrawer) {
+                return {
+                    showDrawer: false,
+                    budgetDrawer: false,
+                    giftDrawer: false,
+                    error: false,
+                    errorMessage: ''
                 }
             } else {
                 return {
                     showDrawer: true,
                     budgetDrawer: false,
-                    giftDrawer: false,
+                    giftDrawer: true,
                     error: false,
-                    errorMessage: '',
-                    sentAuth: true
+                    errorMessage: ''
                 }
             }
         },
@@ -70,7 +106,7 @@ const configureStore = () => {
             if (curState.budget !== value) {
                 let value = payload.budgetInput;
                 const database = firebase.database();
-                const userId = 555;
+                const userId = curState.userId;
                 let budgetValueRef = database.ref(`${userId}/budget/budgetValue`);
 
                 // let budgetValueRef = toPurchase.push();
@@ -85,7 +121,7 @@ const configureStore = () => {
         },
         ADD_GIFT: (curState, payload) => {
             const database = firebase.database();
-            const userId = 555;
+            const userId = curState.userId;
             let toPurchase = database.ref(`${userId}/toPurchase`);
 
             let toPurchaseRef = toPurchase.push();
@@ -99,18 +135,18 @@ const configureStore = () => {
         },
         REMOVE_GIFT: (curState, payload) => {
             const database = firebase.database();
-            const userId = 555;
+            const userId = curState.userId;
             let toPurchaseRef = database.ref(`${userId}/toPurchase/${payload}`);
             toPurchaseRef.set(null);
         },
         REMOVE_BOUGHT_ITEM: (curState, payload) => {
             const database = firebase.database();
-            const userId = 555;
+            const userId = curState.userId;
             let purchasedRef = database.ref(`${userId}/purchased/${payload}`);
             purchasedRef.set(null);
         },
         CHECK_GIFT: (curState, payload) => {
-            const userId = 555;
+            const userId = curState.userId;
             const database = firebase.database();
             let toPurchaseRef = database.ref(`${userId}/toPurchase/${payload.id}`);
             toPurchaseRef.set(null);
@@ -126,7 +162,7 @@ const configureStore = () => {
             })
         },
         UNCHECK_GIFT: (curState, payload) => {
-            const userId = 555;
+            const userId = curState.userId;
             const database = firebase.database();
             let purchasedRef = database.ref(`${userId}/purchased/${payload.id}`);
             purchasedRef.set(null);
@@ -184,7 +220,7 @@ const configureStore = () => {
                 errorMessage: '',
                 isLoggedIn: true,
                 userId: payload,
-                showDrawer: false
+                // showDrawer: false
                 }
             } 
         },
@@ -196,9 +232,9 @@ const configureStore = () => {
                     toSpendValue: 0.00,
                     spentPerc: 0,
                     toSpendPerc: 0,
-                    showDrawer: false,
-                    budgetDrawer: false,
-                    giftDrawer: false,
+                    // showDrawer: false,
+                    // budgetDrawer: false,
+                    // giftDrawer: false,
                     error: false,
                     errorMessage: '',
                     giftList: [],

@@ -21,7 +21,8 @@ import InputDrawer from '../InputDrawer/InputDrawer';
             } 
         });
 
-        let inputDrawer = !state.showDrawer ? null :
+
+        let inputDrawer = 
             (state.showDrawer && !state.isLoggedIn && state.login) ? <InputDrawer inputType='login' /> :
             (state.showDrawer && !state.isLoggedIn && !state.login) ? <InputDrawer inputType='createAccount' /> :
             (state.showDrawer && state.budgetDrawer) ? <InputDrawer inputType='budget' /> :

@@ -13,8 +13,9 @@ const Bottom = props => {
 
     if (state.isLoggedIn) {
         const database = firebase.database();
+        let userId = state.userId;
 
-        database.ref('555').once('value', snapshot => snapshot)
+        database.ref(userId).once('value', snapshot => snapshot)
             .then(snapshot => {
                 let giftList = [];
                 let boughtList = [];
@@ -46,7 +47,7 @@ const Bottom = props => {
                     boughtList.push(boughtGift);
                     spentValue = parseFloat(spentValue) + parseFloat(price);
                 }
-                budgetValue = parseFloat(snapshot.val().budget.budgetValue.value);
+                budgetValue = (snapshot.val().budget) ? parseFloat(snapshot.val().budget.budgetValue.value) : 0.00;
                 toSpendValue = budgetValue - spentValue;
                 spentPerc = Math.round((spentValue / budgetValue) * 100);
                 toSpendPerc = Math.round((toSpendValue / budgetValue)*100);
