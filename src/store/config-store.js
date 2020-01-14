@@ -1,4 +1,3 @@
-// import React from 'react';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
@@ -6,7 +5,7 @@ import { initStore } from './store';
 
 const configureStore = () => {
     const actions = {
-        TOGGLE_BUDGET_DRAWER: curState => {
+        TOGGLE_BUDGET_DRAWER: (curState, payload) => {
             if (curState.budgetDrawer) {
                 return {
                     showDrawer: false,
@@ -25,7 +24,7 @@ const configureStore = () => {
                 }
             }
         },
-        TOGGLE_GIFT_DRAWER: curState => {
+        TOGGLE_GIFT_DRAWER: (curState, payload) => {
             if (curState.giftDrawer) {
                 return {
                     showDrawer: false,
@@ -44,26 +43,7 @@ const configureStore = () => {
                 }
             }
         },
-        // TOGGLE_LOGIN: curState => {
-        //     if (curState.showDrawer) {
-        //         return {
-        //             showDrawer: false,
-        //             // budgetDrawer: false,
-        //             // giftDrawer: false,
-        //             error: false,
-        //             errorMessage: ''
-        //         }
-        //     } else {
-        //         return {
-        //             showDrawer: true,
-        //             // budgetDrawer: false,
-        //             // giftDrawer: false,
-        //             error: false,
-        //             errorMessage: ''
-        //         }
-        //     }
-        // },
-        TOGGLE_LOGIN_BUDGET: curState => {
+        TOGGLE_LOGIN_BUDGET: (curState, payload) => {
             if (curState.showDrawer) {
                 return {
                     showDrawer: false,
@@ -82,7 +62,7 @@ const configureStore = () => {
                 }
             }
         },
-        TOGGLE_LOGIN_GIFT: curState => {
+        TOGGLE_LOGIN_GIFT: (curState, payload) => {
             if (curState.showDrawer) {
                 return {
                     showDrawer: false,
@@ -102,29 +82,25 @@ const configureStore = () => {
             }
         },
         UPDATE_BUDGET_VALUE: (curState, payload) => {
-            let value = payload.budgetInput;
+            const value = payload.budgetInput;
             if (curState.budget !== value) {
-                let value = payload.budgetInput;
+                const value = payload.budgetInput;
                 const database = firebase.database();
                 const userId = curState.userId;
-                let budgetValueRef = database.ref(`${userId}/budget/budgetValue`);
+                const budgetValueRef = database.ref(`${userId}/budget/budgetValue`);
 
-                // let budgetValueRef = toPurchase.push();
                 budgetValueRef.set({
                     value
                 });
-
                 return { budgetValue: value};
-            }
-
-            
+            }            
         },
         ADD_GIFT: (curState, payload) => {
             const database = firebase.database();
             const userId = curState.userId;
-            let toPurchase = database.ref(`${userId}/toPurchase`);
+            const toPurchase = database.ref(`${userId}/toPurchase`);
 
-            let toPurchaseRef = toPurchase.push();
+            const toPurchaseRef = toPurchase.push();
             toPurchaseRef.set({
                 id: toPurchaseRef.key,
                 who: payload.who,
@@ -136,23 +112,23 @@ const configureStore = () => {
         REMOVE_GIFT: (curState, payload) => {
             const database = firebase.database();
             const userId = curState.userId;
-            let toPurchaseRef = database.ref(`${userId}/toPurchase/${payload}`);
+            const toPurchaseRef = database.ref(`${userId}/toPurchase/${payload}`);
             toPurchaseRef.set(null);
         },
         REMOVE_BOUGHT_ITEM: (curState, payload) => {
             const database = firebase.database();
             const userId = curState.userId;
-            let purchasedRef = database.ref(`${userId}/purchased/${payload}`);
+            const purchasedRef = database.ref(`${userId}/purchased/${payload}`);
             purchasedRef.set(null);
         },
         CHECK_GIFT: (curState, payload) => {
             const userId = curState.userId;
             const database = firebase.database();
-            let toPurchaseRef = database.ref(`${userId}/toPurchase/${payload.id}`);
+            const toPurchaseRef = database.ref(`${userId}/toPurchase/${payload.id}`);
             toPurchaseRef.set(null);
 
-            let purchased = database.ref(`${userId}/purchased`);
-            let purchasedRef = purchased.push();
+            const purchased = database.ref(`${userId}/purchased`);
+            const purchasedRef = purchased.push();
             purchasedRef.set({
                 id: purchasedRef.key,
                 who: payload.who,
@@ -164,11 +140,11 @@ const configureStore = () => {
         UNCHECK_GIFT: (curState, payload) => {
             const userId = curState.userId;
             const database = firebase.database();
-            let purchasedRef = database.ref(`${userId}/purchased/${payload.id}`);
+            const purchasedRef = database.ref(`${userId}/purchased/${payload.id}`);
             purchasedRef.set(null);
 
-            let toPurchase = database.ref(`${userId}/toPurchase`);
-            let toPurchaseRef = toPurchase.push();
+            const toPurchase = database.ref(`${userId}/toPurchase`);
+            const toPurchaseRef = toPurchase.push();
             toPurchaseRef.set({
                 id: toPurchaseRef.key,
                 who: payload.who,
@@ -220,7 +196,6 @@ const configureStore = () => {
                 errorMessage: '',
                 isLoggedIn: true,
                 userId: payload,
-                // showDrawer: false
                 }
             } 
         },
@@ -232,9 +207,6 @@ const configureStore = () => {
                     toSpendValue: 0.00,
                     spentPerc: 0,
                     toSpendPerc: 0,
-                    // showDrawer: false,
-                    // budgetDrawer: false,
-                    // giftDrawer: false,
                     error: false,
                     errorMessage: '',
                     giftList: [],

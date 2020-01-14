@@ -1,13 +1,10 @@
 .GiftTitleBar {
-    /* display: none; */
     width: 90%;
     margin: 0.75rem auto;
     padding: 0.5rem;
     color: white;
-    /* text-shadow: -1px -1px 2px black;  */
     text-shadow: -1px -1px 2px black, 1px 1px 2px black, -8px 8px 10px black, 8px 8px 10px black, 8px -8px 10px black, -8px -8px 10px black;
-    /* background-color: rgba(108, 108, 106, 0.85); */
     border-radius: 5px;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 1.35rem;
 }

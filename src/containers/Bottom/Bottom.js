@@ -13,37 +13,37 @@ const Bottom = props => {
 
     if (state.isLoggedIn) {
         const database = firebase.database();
-        let userId = state.userId;
+        const userId = state.userId;
 
         database.ref(userId).once('value', snapshot => snapshot)
             .then(snapshot => {
-                let giftList = [];
-                let boughtList = [];
+                const giftList = [];
+                const boughtList = [];
                 let budgetValue;
                 let toSpendValue = 0;
                 let spentValue = 0;
                 let toSpendPerc;
                 let spentPerc;
                 if(snapshot.val()) {
-                let toPurchase = snapshot.val().toPurchase;
-                let purchased = snapshot.val().purchased;
+                const toPurchase = snapshot.val().toPurchase;
+                const purchased = snapshot.val().purchased;
                 for (let each in toPurchase) {
-                    let id = toPurchase[each].id;
-                    let who = toPurchase[each].who.toUpperCase();
-                    let what = toPurchase[each].what.toUpperCase();
-                    let where = toPurchase[each].where.toUpperCase();
-                    let price = toPurchase[each].price;
-                    let newGift = [id, who, what, where, price];
+                    const id = toPurchase[each].id;
+                    const who = toPurchase[each].who.toUpperCase();
+                    const what = toPurchase[each].what.toUpperCase();
+                    const where = toPurchase[each].where.toUpperCase();
+                    const price = toPurchase[each].price;
+                    const newGift = [id, who, what, where, price];
                     giftList.push(newGift);
                     spentValue = parseFloat(spentValue) + parseFloat(price);
                 }
                 for (let each in purchased) {
-                    let id = purchased[each].id;
-                    let who = purchased[each].who.toUpperCase();
-                    let what = purchased[each].what.toUpperCase();
-                    let where = purchased[each].where.toUpperCase();
-                    let price = purchased[each].price;
-                    let boughtGift = [id, who, what, where, price];
+                    const id = purchased[each].id;
+                    const who = purchased[each].who.toUpperCase();
+                    const what = purchased[each].what.toUpperCase();
+                    const where = purchased[each].where.toUpperCase();
+                    const price = purchased[each].price;
+                    const boughtGift = [id, who, what, where, price];
                     boughtList.push(boughtGift);
                     spentValue = parseFloat(spentValue) + parseFloat(price);
                 }
@@ -65,10 +65,10 @@ const Bottom = props => {
 
         
 
-    let check = e => {
-        let curGift = e.target.closest('div').parentNode.id;
-        let selected = [...state.giftList].filter(cur => curGift === cur[0]);
-        let payload = {
+    const check = e => {
+        const curGift = e.target.closest('div').parentNode.id;
+        const selected = [...state.giftList].filter(cur => curGift === cur[0]);
+        const payload = {
             id: selected[0][0],
             who: selected[0][1],
             what: selected[0][2],
@@ -79,10 +79,10 @@ const Bottom = props => {
         dispatch('CHECK_GIFT', payload);
     }
 
-    let uncheck = e => {
-        let curBoughtItem = e.target.closest('div').parentNode.id;
-        let selected = [...state.boughtList].filter(cur => curBoughtItem === cur[0]);
-        let payload = {
+    const uncheck = e => {
+        const curBoughtItem = e.target.closest('div').parentNode.id;
+        const selected = [...state.boughtList].filter(cur => curBoughtItem === cur[0]);
+        const payload = {
             id: selected[0][0],
             who: selected[0][1],
             what: selected[0][2],
@@ -92,20 +92,20 @@ const Bottom = props => {
         dispatch('UNCHECK_GIFT', payload);
     }
 
-    let remove = e => {
+    const remove = e => {
         const id = e.target.closest('div').parentNode.id;
         dispatch('REMOVE_GIFT', id);
     }
 
-    let removeBoughtItem = e => {
+    const removeBoughtItem = e => {
         const id = e.target.closest('div').parentNode.id;
         dispatch('REMOVE_BOUGHT_ITEM', id);
 
     }
 
-    let gifts = state.giftList.map(cur => <GiftItem key={cur[0]} id={cur[0]} who={cur[1]} what={cur[2]} where={cur[3]} price={FORMAT_NUMBER(cur[4])} check={e=>check(e)} removeGift={e=>remove(e)}/>);
-    let boughtGifts = state.boughtList.map(cur => <BoughtItem key={cur[0]} id={cur[0]} who={cur[1]} what={cur[2]} where={cur[3]} price={FORMAT_NUMBER(cur[4])} uncheck={e=>uncheck(e)} removeBoughtItem={e=>removeBoughtItem(e)}/>);
-    let titleBar = state.boughtList.length > 0 ? <GiftTitleBar /> : null
+    const gifts = state.giftList.map(cur => <GiftItem key={cur[0]} id={cur[0]} who={cur[1]} what={cur[2]} where={cur[3]} price={FORMAT_NUMBER(cur[4])} check={e=>check(e)} removeGift={e=>remove(e)}/>);
+    const boughtGifts = state.boughtList.map(cur => <BoughtItem key={cur[0]} id={cur[0]} who={cur[1]} what={cur[2]} where={cur[3]} price={FORMAT_NUMBER(cur[4])} uncheck={e=>uncheck(e)} removeBoughtItem={e=>removeBoughtItem(e)}/>);
+    const titleBar = state.boughtList.length > 0 ? <GiftTitleBar /> : null
 
     return (
 

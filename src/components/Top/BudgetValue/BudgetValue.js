@@ -2,9 +2,9 @@ import React from 'react';
 import { useStore, FORMAT_NUMBER } from '../../../store/store';
 import classes from './BudgetValue.module.css';
 
-const BudgetValue = props => {
+const BudgetValue = () => {
 
-    let budgetValue = FORMAT_NUMBER(useStore()[0].budgetValue);
+    const budgetValue = FORMAT_NUMBER(useStore()[0].budgetValue);
 
     return (
         <div className={classes.BudgetValueCont}>

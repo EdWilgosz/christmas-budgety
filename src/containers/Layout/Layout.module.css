@@ -8,18 +8,22 @@
     background-repeat: no-repeat;
     background-position: center;
     position: fixed;
-    /* opacity: .5; */
     z-index: -100;
 }
 
+.TopCont {
+    position: sticky;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+}
+
 @media (min-width: 800px) {
-    .BackgroundImage {
-        background-image: url('../../assets/images/santa-cartoon-sm-md.png');
-    }
+    .BackgroundImage { background-image: url('../../assets/images/santa-cartoon-sm-md.png'); }
 }
 
 @media (min-width: 1200px) {
-    .BackgroundImage {
-        background-image: url('../../assets/images/santa_cartoon.png');
-    }
+    .BackgroundImage { background-image: url('../../assets/images/santa_cartoon.png'); }
 }

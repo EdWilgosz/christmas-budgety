@@ -15,19 +15,13 @@
 }
 
 @media (min-width: 600px) {
-    .BarButton {
-        font-size: 1.25rem;
-    }
+    .BarButton { font-size: 1.25rem; }
 }
 
 @media (min-width: 900px) {
-    .BarButton {
-        font-size: 1.5rem;
-    }
+    .BarButton { font-size: 1.5rem; }
 }
 
 @media (min-width: 1200px) {
-    .BarButton {
-        font-size: 1.75rem;
-    }
+    .BarButton { font-size: 1.75rem; }
 }

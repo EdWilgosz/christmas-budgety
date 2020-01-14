@@ -1,6 +1,5 @@
 import React from 'react';
 import { useStore } from '../../store/store';
-
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
@@ -8,8 +7,7 @@ import BudgetCont from '../BudgetCont/BudgetCont';
 import ButtonBar from '../../components/UI/ButtonBar/ButtonBar';
 import InputDrawer from '../InputDrawer/InputDrawer';
 
-
-    const Top = props => {
+    const Top = () => {
         
         const [state, dispatch] = useStore();
 
@@ -21,18 +19,61 @@ import InputDrawer from '../InputDrawer/InputDrawer';
             } 
         });
 
+        const createAccount = e => {
+            e.preventDefault();
+            const email = document.getElementById('emailInput');
+            const password = document.getElementById('passwordInput');
+            firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
+            .then(() => {
+                email.value = '';
+                password.value = '';
+            })
+            .catch(error => {
+                email.value = '';
+                password.value = '';
+                dispatch('ERROR_LOGIN', error.message)
+            });
+        }
+    
+        const login = e => {
+            e.preventDefault();
+            const email = document.getElementById('emailInput');
+            const password = document.getElementById('passwordInput');
+            firebase.auth().signInWithEmailAndPassword(email.value, password.value)
+            .then(() => {
+                email.value = '';
+                password.value = '';
+                setTimeout(() => {
+                    firebase.auth().signOut();
+                }, 1800 * 1000);
+            })
+            .catch(error => {
+                email.value = '';
+                password.value = '';
+                dispatch('ERROR_LOGIN', error.message)
+            });
+        }
+    
+        const toggleCreateAccount = e => {
+            e.preventDefault();
+            dispatch('TOGGLE_LOGIN_CREATE_ACCOUNT');
+        }
+    
+        const logout = e => {
+            e.preventDefault();
+            firebase.auth().signOut();
+        }
 
-        let inputDrawer = 
-            (state.showDrawer && !state.isLoggedIn && state.login) ? <InputDrawer inputType='login' /> :
-            (state.showDrawer && !state.isLoggedIn && !state.login) ? <InputDrawer inputType='createAccount' /> :
-            (state.showDrawer && state.budgetDrawer) ? <InputDrawer inputType='budget' /> :
-            (state.showDrawer && state.giftDrawer) ? <InputDrawer inputType='gift' /> : null;
+        const inputDrawer = 
+            (state.showDrawer && !state.isLoggedIn && state.login) ? <InputDrawer inputType='login' login={e=>login(e)} toggleCreateAccount={e=>toggleCreateAccount(e)} /> :
+            (state.showDrawer && !state.isLoggedIn && !state.login) ? <InputDrawer inputType='createAccount' createAccount={e=>createAccount(e)} toggleCreateAccount={e=>toggleCreateAccount(e)} /> :
+            (state.showDrawer && state.budgetDrawer) ? <InputDrawer inputType='budget' logout={e=>logout(e)} /> :
+            (state.showDrawer && state.giftDrawer) ? <InputDrawer inputType='gift' logout={e=>logout(e)} /> : null;
 
     return (
         <React.Fragment>
             <BudgetCont />
             <ButtonBar />
-            {/* {state.showDrawer ? inputDrawer : null} */}
             {inputDrawer}
         </React.Fragment>
     );

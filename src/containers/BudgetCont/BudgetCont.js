@@ -1,9 +1,10 @@
 import React from 'react';
-import BudgetValue from '../../components/Top/BudgetValue/BudgetValue';
-import BudgetSnap from '../../components/Top/BudgetSnap/BudgetSnap';
 import classes from './BudgetCont.module.css';
 
-const BudgetCont = props => {
+import BudgetValue from '../../components/Top/BudgetValue/BudgetValue';
+import BudgetSnap from '../../components/Top/BudgetSnap/BudgetSnap';
+
+const BudgetCont = () => {
 
     return (
         <div className={classes.BudgetCont}>

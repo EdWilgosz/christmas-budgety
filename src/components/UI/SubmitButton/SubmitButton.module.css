@@ -33,7 +33,6 @@
 
 @media(min-width: 900px) {
     .SubmitButton {
-        /* width: 48%; */
         font-size: 1.4rem;
         padding: 0.6rem;
     }
@@ -41,7 +40,6 @@
 
 @media(min-width: 1200px) {
     .SubmitButton {
-        /* width: 48%; */
         font-size: 1.6rem;
         padding: 0.6rem;
     }

@@ -2,7 +2,7 @@ import React from 'react';
 import BarButton from '../BarButton/BarButton';
 import classes from './ButtonBar.module.css';
 
-const ButtonBar = props => {
+const ButtonBar = () => {
 
     return (
         <div className={classes.ButtonBar}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './GiftTitleBar.module.css';
 
-const GiftTitleBar = props => {
+const GiftTitleBar = () => {
 
     return (
         <div className={classes.GiftTitleBar}>

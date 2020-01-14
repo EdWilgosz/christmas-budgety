@@ -11,11 +11,11 @@ const BudgetSnap = props => {
     const spentPerc = state.spentPerc < 1 ? '--' : state.spentPerc > 100 ? '100' : state.spentPerc;
     const toSpendPerc = state.toSpendPerc > 0 ? state.toSpendPerc : '--';
 
-    let type = props.type === 'spent';
-    let contType = [type ? classes.Spent : classes.ToSpend, classes.Cont].join(' ');
-    let textType = type ? 'ALREADY SPENT' : 'LEFT TO SPEND';
-    let valType = type ? spentValue : toSpendValue;
-    let percType = type ? `${spentPerc}%` : `${toSpendPerc}%`;
+    const type = props.type === 'spent';
+    const contType = [type ? classes.Spent : classes.ToSpend, classes.Cont].join(' ');
+    const textType = type ? 'ALREADY SPENT' : 'LEFT TO SPEND';
+    const valType = type ? spentValue : toSpendValue;
+    const percType = type ? `${spentPerc}%` : `${toSpendPerc}%`;
 
     return (
         <div className={contType}>

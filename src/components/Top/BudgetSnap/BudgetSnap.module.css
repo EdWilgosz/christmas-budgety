@@ -11,21 +11,13 @@
     transition: background-color 500ms;
 }
 
-.Spent {
-    background-color: rgba(255,80,73, 0.5);
-}
+.Spent { background-color: rgba(255,80,73, 0.5); }
 
-.Spent:hover {
-    background-color: rgba(255,80,73, 0.8);
-}
+.Spent:hover { background-color: rgba(255,80,73, 0.8); }
 
-.ToSpend {
-    background-color: rgba(102,242,46, 0.5);
-}
+.ToSpend { background-color: rgba(102,242,46, 0.5); }
 
-.ToSpend:hover {
-    background-color: rgba(102,242,46, 0.8);
-}
+.ToSpend:hover { background-color: rgba(102,242,46, 0.8); }
 
 .Text {
     grid-column: 1;
@@ -47,7 +39,6 @@
 }
 
 .Val {
-    /* grid-row: 1; */
     align-self: flex-end;
     text-align: right;
     font-size: 0.8rem;
@@ -66,13 +57,10 @@
 
 
 @media (min-width: 400px) {
-    .Cont {
-        padding: 0.4rem;
-    }
 
-    .Text {
-        white-space: nowrap;
-    }
+    .Cont { padding: 0.4rem; }
+
+    .Text { white-space: nowrap; }
 }
 
 @media (min-width: 600px) {
@@ -81,21 +69,13 @@
         padding: 0.5rem;
     }
 
-    .Text {
-        font-size: 0.95rem;
-    }
+    .Text { font-size: 0.95rem; }
 
-    .Val {
-        font-size: 0.9rem;
-    }
+    .Val { font-size: 0.9rem; }
 
-    .Perc {
-        font-size: 0.8rem;
-    }
+    .Perc { font-size: 0.8rem; }
 
-    .Arrow {
-        display: inline-block;
-    }
+    .Arrow { display: inline-block; }
 }
 
 @media (min-width: 900px) {
@@ -104,17 +84,11 @@
         padding: 0.75rem;
     }
 
-    .Text {
-        font-size: 1.1rem;
-    }
+    .Text { font-size: 1.1rem; }
 
-    .Val {
-        font-size: 1rem;
-    }
+    .Val { font-size: 1rem; }
 
-    .Perc {
-        font-size: 0.9rem;
-    }
+    .Perc { font-size: 0.9rem; }
 }
 
 @media (min-width: 1200px) {
@@ -123,15 +97,9 @@
         padding: 0.75rem;
     }
 
-    .Text {
-        font-size: 1.25rem;
-    }
+    .Text { font-size: 1.25rem; }
 
-    .Val {
-        font-size: 1.4rem;
-    }
+    .Val { font-size: 1.4rem; }
 
-    .Perc {
-        font-size: 1.25rem;
-    }
+    .Perc { font-size: 1.25rem; }
 }
