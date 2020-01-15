@@ -2,18 +2,21 @@
     font-family: inherit;
     width: 35%;
     font-size: 0.9rem;
-    margin: 0.4rem auto;
+    margin: 0.5rem auto;
     padding: 0.4rem;
     color: white;
     background-color: rgba(219, 188, 97, 0.88);
     border-radius: 5px;
     border: none;
     cursor: pointer;
-    transition: transform 500ms;
 }
 
 .SubmitButton:hover {
-    transform: scale(1.05);
+    transform: scale(0.99);
+}
+
+.SubmitButton:focus {
+    outline-color: rgb(6, 71, 224);
 }
 
 @media(min-width: 400px) {
@@ -34,12 +37,14 @@
 @media(min-width: 900px) {
     .SubmitButton {
         font-size: 1.4rem;
-        padding: 0.6rem;
+        margin: 0.75rem auto;
+        padding: 0.7rem;
     }
 }
 
 @media(min-width: 1200px) {
     .SubmitButton {
+        margin: 0.95rem auto;
         font-size: 1.6rem;
         padding: 0.6rem;
     }

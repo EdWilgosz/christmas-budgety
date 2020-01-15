@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 0.4rem;
+    padding: 1rem 0.4rem;
     background-color: rgba(137, 137, 137, 0.85);
 }
 
@@ -18,6 +18,7 @@
 }
 
 .Or {
+    flex: 1 100%;
     font-weight: bold;
     width: 70%;
     color: white;
@@ -27,7 +28,7 @@
 
 .Logout {
     position: absolute;
-    bottom: 0.8rem;
+    bottom: 1.6rem;
     right: 0.5rem;
     padding: 0.4rem;
     color: white;
@@ -37,8 +38,75 @@
     cursor: pointer;
 }
 
+.Logout:hover {
+    transform: scale(0.98);
+}
+
+.Logout:focus {
+    outline-color: rgb(6, 71, 224);
+}
+
 .Break {
     flex-basis: 100%;
     height: 0;
 }
 
+@media (min-width: 400px) {
+    .TitleBar {
+        font-size: 1.15rem;
+    }
+    .Or {
+        font-size: 1.15rem;
+    }
+}
+
+@media (min-width: 600px) {
+    .InputDrawer {
+        padding: 1.5rem 0.4rem;
+    }
+    .TitleBar {
+        font-size: 1.35rem;
+    }
+    .Or {
+        font-size: 1.35rem;
+    }
+    .Logout {
+        font-size: 0.9rem;
+        bottom: 2.25rem;
+        right: 0.8rem;
+    }
+}
+
+@media (min-width: 900px) {
+    .InputDrawer {
+        padding: 1.75rem 0.4rem;
+    }    
+    .TitleBar {
+        font-size: 1.5rem;
+    }
+    .Or {
+        font-size: 1.5rem;
+    }
+    .Logout {
+        font-size: 1rem;
+        bottom: 3rem;
+        right: 1rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .InputDrawer {
+        padding: 2rem 0.4rem;
+    }    
+    .TitleBar {
+        font-size: 1.75rem;
+    }
+    .Or {
+        font-size: 1.75rem;
+    }
+    .Logout {
+        font-size: 1.25rem;
+        bottom: 3.5rem;
+        right: 1.25rem;
+    }
+}

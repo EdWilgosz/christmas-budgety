@@ -3,7 +3,7 @@
     grid-template: 1fr 1fr / 1fr 1fr 10%;
     width: 90%;
     margin: 0.75rem auto;
-    padding: 0.5rem;
+    padding: 0.4rem;
     color: rgb(201, 201, 201);
     text-shadow: -1px -1px 2px black, 1px 1px 2px black, 1px -1px 2px black, -1px 1px 2px black; 
     font-weight: bold;
@@ -34,4 +34,39 @@
 .Delete {
     grid-area: 2 / 3;
     font-style: normal;
+}
+
+.Checked:hover {
+    transform: scale(0.95);
+}
+
+.Delete:hover {
+    transform: scale(0.95);
+}
+
+@media (min-width: 600px) {
+    .BoughtItem {
+        margin: 1rem auto;
+        
+    }
+    .Field { font-size: 1rem; }
+    .Icon { font-size: 1.2rem; }
+}
+
+@media (min-width: 900px) {
+    .BoughtItem {
+        margin: 1.15rem auto;
+        padding: 0.5rem;
+    }
+    .Field { font-size: 1.1rem; }
+    .Icon { font-size: 1.3rem; }
+}
+
+@media (min-width: 1200px) {
+    .BoughtItem {
+        margin: 1.25rem auto;
+        padding: 0.6rem;
+    }
+    .Field { font-size: 1.2rem; }
+    .Icon { font-size: 1.4rem; }
 }

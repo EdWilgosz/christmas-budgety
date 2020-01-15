@@ -81,7 +81,7 @@ const InputDrawer = props => {
                             </div>;
 
     let budget =            <div className={classes.InputDrawer}>
-                                <Input type={'text'} placeholder={'Enter budget'} inputType="budgetInput"/>
+                                <Input type={'text'} placeholder={'Enter Budget'} inputType="budgetInput"/>
                                     <div className={classes.Break} />
                                 {state.error ? <Error errorMessage={state.errorMessage} /> : null }
                                     <div className={classes.Break} />

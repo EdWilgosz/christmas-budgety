@@ -2,12 +2,15 @@
     font-family: inherit;
     width: 75%;
     font-size: 0.8rem;
-    color: #aaa;
     border-radius: 5px;
     border: none;
-    margin: 0.4rem auto;
+    margin: 0.5rem auto;
     padding: 0.4rem;
     text-align: center;
+}
+
+.Input:focus {
+    outline-color: rgb(6, 71, 224);
 }
 
 @media(min-width: 400px) {
@@ -27,16 +30,17 @@
 
 @media(min-width: 900px) {
     .Input {
-        width: 48%;
+        margin: 0.75rem auto;
         font-size: 1.25rem;
-        padding: 0.6rem;
+        padding: 0.7rem;
+        
     }
 }
 
 @media(min-width: 1200px) {
     .Input {
-        width: 48%;
+        margin: 0.95rem auto;
         font-size: 1.35rem;
-        padding: 0.6rem;
+        padding: 0.8rem;
     }
 }
