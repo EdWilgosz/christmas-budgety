@@ -3,7 +3,7 @@
     grid-template: 1fr 1fr / 1fr 1fr 10%;
     width: 90%;
     margin: 0.75rem auto;
-    padding: 0.4rem;
+    padding: 0.5rem 0.4rem;
     color: rgb(201, 201, 201);
     text-shadow: -1px -1px 2px black, 1px 1px 2px black, 1px -1px 2px black, -1px 1px 2px black; 
     font-weight: bold;
@@ -14,9 +14,13 @@
     align-items: center;
 }
 
-.Field { font-size: 0.85rem; }
+.Field { 
+    font-size: 0.95rem; 
+    overflow: hidden;
+    max-height: 1.25rem;
+}
 
-.Icon { font-size: 1rem; }
+.Icon { font-size: 1.2rem; }
 
 .Who { grid-area: 1 / 1; }
 
@@ -28,11 +32,13 @@
 
 .Checked {
     grid-area: 1 / 3;
+    padding-bottom: 0.075rem;
     font-style: normal;
 }
 
 .Delete {
     grid-area: 2 / 3;
+    padding-top: 0.075rem;
     font-style: normal;
 }
 
@@ -49,8 +55,14 @@
         margin: 1rem auto;
         
     }
-    .Field { font-size: 1rem; }
-    .Icon { font-size: 1.2rem; }
+    .Field { 
+        font-size: 1rem; 
+        max-height: 1.6rem;
+    }
+    .Icon { font-size: 1.25rem; }
+
+    .Checked,
+    .Delete { padding: 0; }
 }
 
 @media (min-width: 900px) {

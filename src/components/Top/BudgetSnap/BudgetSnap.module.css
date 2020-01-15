@@ -3,7 +3,7 @@
     grid-template-columns: repeat(2, 1fr);
     width: 90%;
     margin: 0.15rem auto;
-    padding: 0.25rem;
+    padding: 0.3rem;
     color: white;
     text-shadow: -1px -1px 2px black;
     background-color: rgba(255, 213, 73, 0.5);
@@ -25,8 +25,9 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     text-align: start;
+    margin-right: 0.1rem;
 }
 
 .SumCont {
@@ -41,13 +42,14 @@
 .Val {
     align-self: flex-end;
     text-align: right;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    overflow: hidden;
 }
 
 .Perc {
     align-self: flex-start;
     text-align: right;
-    font-size: 0.7rem;
+    font-size: 0.85rem;
 }
 
 .Arrow {
@@ -60,7 +62,9 @@
 
     .Cont { padding: 0.4rem; }
 
-    .Text { white-space: nowrap; }
+    .Text { font-size: 0.95rem; }
+
+    .Val { font-size: 0.95rem; }
 }
 
 @media (min-width: 600px) {
@@ -69,11 +73,15 @@
         padding: 0.5rem;
     }
 
-    .Text { font-size: 0.95rem; }
+    .Text { 
+        font-size: 1.05rem;
+        white-space: nowrap;
+     
+    }
 
-    .Val { font-size: 0.9rem; }
+    .Val { font-size: 1rem; }
 
-    .Perc { font-size: 0.8rem; }
+    .Perc { font-size: 0.9rem; }
 
     .Arrow { display: inline-block; }
 }
@@ -84,11 +92,11 @@
         padding: 0.75rem;
     }
 
-    .Text { font-size: 1.1rem; }
+    .Text { font-size: 1.15rem; }
 
-    .Val { font-size: 1rem; }
+    .Val { font-size: 1.15rem; }
 
-    .Perc { font-size: 0.9rem; }
+    .Perc { font-size: 1rem; }
 }
 
 @media (min-width: 1200px) {
