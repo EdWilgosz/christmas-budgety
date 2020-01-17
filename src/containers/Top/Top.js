@@ -64,9 +64,29 @@ import InputDrawer from '../InputDrawer/InputDrawer';
             firebase.auth().signOut();
         }
 
+        const toggleResetPass = () => {
+            dispatch('TOGGLE_RESET_PASS')
+        }
+
+        const resetPassword = e => {
+            e.preventDefault();
+            const email = document.getElementById('emailInput');
+            firebase.auth().sendPasswordResetEmail(email.value)
+                .then(() => {
+                    document.getElementById('resetPassTitle').style.display = 'block';
+                    setTimeout(() => {
+                        dispatch('PASS_RESET');
+                    }, 2500)
+                })
+                .catch(error => {
+                    dispatch('ERROR_RESET_PASS', error.message);
+                });
+        }
+
         const inputDrawer = 
-            (state.showDrawer && !state.isLoggedIn && state.login) ? <InputDrawer inputType='login' login={e=>login(e)} toggleCreateAccount={e=>toggleCreateAccount(e)} /> :
-            (state.showDrawer && !state.isLoggedIn && !state.login) ? <InputDrawer inputType='createAccount' createAccount={e=>createAccount(e)} toggleCreateAccount={e=>toggleCreateAccount(e)} /> :
+            (state.showDrawer && !state.isLoggedIn && state.resetPass) ? <InputDrawer inputType='resetPass' resetPassword={resetPassword} toggleResetPass={toggleResetPass} /> :
+            (state.showDrawer && !state.isLoggedIn && state.login) ? <InputDrawer inputType='login' login={e=>login(e)} toggleResetPass={toggleResetPass} toggleCreateAccount={e=>toggleCreateAccount(e)} /> :
+            (state.showDrawer && !state.isLoggedIn && !state.login) ? <InputDrawer inputType='createAccount' createAccount={e=>createAccount(e)} toggleResetPass={toggleResetPass} toggleCreateAccount={e=>toggleCreateAccount(e)} /> :
             (state.showDrawer && state.budgetDrawer) ? <InputDrawer inputType='budget' logout={e=>logout(e)} /> :
             (state.showDrawer && state.giftDrawer) ? <InputDrawer inputType='gift' logout={e=>logout(e)} /> : null;
 

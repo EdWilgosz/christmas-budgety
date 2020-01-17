@@ -171,6 +171,19 @@ const configureStore = () => {
                 errorMessage: payload
             }
         },
+        ERROR_RESET_PASS: (curState, payload) => {
+            return {
+                error: true,
+                errorMessage: payload
+            }
+        },
+        PASS_RESET: (curState, payload) => {
+            return {
+                resetPass: false,
+                error: false,
+                errorMessage: ''
+            }
+        },
         UPDATE_LISTS: (curState, payload) => {
             return { 
                 budgetValue: payload[2],
@@ -185,6 +198,13 @@ const configureStore = () => {
         TOGGLE_LOGIN_CREATE_ACCOUNT: (curState, payload) => {
             return {
                 login: !curState.login,
+                error: false,
+                errorMessage: ''
+            }
+        },
+        TOGGLE_RESET_PASS: (curState, payload) => {
+            return {
+                resetPass: !curState.resetPass,
                 error: false,
                 errorMessage: ''
             }
@@ -233,6 +253,7 @@ const configureStore = () => {
         giftList: [],
         boughtList: [],
         login: true,
+        resetPass: false,
         isLoggedIn: false,
         userId: null
     });

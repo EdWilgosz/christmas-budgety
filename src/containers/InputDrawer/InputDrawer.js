@@ -62,9 +62,12 @@ const InputDrawer = props => {
                                     <div className={classes.Break}></div>
                                 {state.error ? <Error errorMessage={state.errorMessage} /> : null }
                                     <div className={classes.Break}></div>
-                                <SubmitButton inputType="login" clicked={props.login} /> 
-                                    <div className={classes.Or}>or</div>
-                                <SubmitButton inputType="createAccount" clicked={props.toggleCreateAccount} /> 
+                                <SubmitButton inputType="login" clicked={props.login} />
+                                <div className={classes.LinkContainer}> 
+                                    <div className={classes.Or}>Don't have an account? <span className={classes.Link} onClick={props.toggleCreateAccount}>Sign up</span></div>
+                                    <div className={classes.Or}>Forgot your password? <span className={classes.Link} onClick={props.toggleResetPass}>Reset password</span></div>
+                                </div> 
+                                {/* <SubmitButton inputType="createAccount" clicked={props.toggleCreateAccount} />  */}
                             </div>; 
                     
     let createAccountForm = <div className={classes.InputDrawer}>
@@ -75,10 +78,26 @@ const InputDrawer = props => {
                                     <div className={classes.Break}></div>
                                 {state.error ? <Error errorMessage={state.errorMessage} /> : null }
                                     <div className={classes.Break}></div>
-                                <SubmitButton inputType="createAccount" clicked={props.createAccount} /> 
-                                    <div className={classes.Or}>or</div>
-                                <SubmitButton inputType="login" clicked={props.toggleCreateAccount} /> 
+                                <SubmitButton inputType="createAccount" clicked={props.createAccount} />
+                                <div className={classes.LinkContainer}> 
+                                    <div className={classes.Or}>Have an account? <span className={classes.Link} onClick={props.toggleCreateAccount}>Log in</span></div>
+                                    <div className={classes.Or}>Forgot your password? <span className={classes.Link} onClick={props.toggleResetPass}>Reset password</span></div>
+                                </div>
+                                    {/* <div className={classes.Or}>or</div>
+                                <SubmitButton inputType="login" clicked={props.toggleCreateAccount} />  */}
                             </div>;
+
+    let resetPassword =     <div className={classes.InputDrawer}>
+                                <div className={classes.ResetPassTitle} id='resetPassTitle'><div style={{display: 'inline-block'}}>An email with a password</div> <div style={{display: 'inline-block'}}>reset link has been sent!</div></div>
+                                <Input type={'email'} placeholder={'Enter your email'} inputType="emailInput"/>
+                                    <div className={classes.Break}></div>
+                                {state.error ? <Error errorMessage={state.errorMessage} /> : null }
+                                    <div className={classes.Break}></div>
+                                <SubmitButton inputType="resetPass" clicked={props.resetPassword} />
+                                <div className={classes.LinkContainer}> 
+                                    <div className={classes.Or}>Back to <span className={classes.Link} onClick={props.toggleResetPass}>Log in</span></div>
+                                </div>
+                            </div>
 
     let budget =            <div className={classes.InputDrawer}>
                                 <Input type={'text'} placeholder={'Enter Budget'} inputType="budgetInput" maxLength="5"/>
@@ -100,14 +119,16 @@ const InputDrawer = props => {
                                 <button className={classes.Logout} onClick={props.logout}>Logout</button> 
                             </div>;
     
-    let inputs = props.inputType === 'login' ? 
-            loginForm : 
-                props.inputType === 'createAccount' ?
-                    createAccountForm :
-                        props.inputType === 'budget' ? 
-                            budget : 
-                             props.inputType === 'gift' ?
-                                gift : null;
+    let inputs = props.inputType === 'resetPass' ?
+            resetPassword :
+                props.inputType === 'login' ? 
+                    loginForm : 
+                        props.inputType === 'createAccount' ?
+                            createAccountForm :
+                                props.inputType === 'budget' ? 
+                                    budget : 
+                                    props.inputType === 'gift' ?
+                                        gift : null;
 
     return inputs;
 }

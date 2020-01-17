@@ -17,13 +17,26 @@
     text-transform: uppercase;
 }
 
-.Or {
+.LinkContainer {
+    padding: 0.75rem;
     flex: 1 100%;
-    font-weight: bold;
-    width: 70%;
+}
+
+.Or {
+    font-size: 0.9rem;
+    width: 100%;
     color: white;
     text-shadow: -1px -1px 2px black;
-    text-transform: uppercase;  
+    padding-bottom: 0.25rem;
+}
+
+.Link {
+    font-size: 0.85rem;
+    color: blue;
+    text-decoration: underline;
+    text-shadow: none;
+    margin-left: 0.15rem;
+    cursor: pointer;
 }
 
 .Logout {
@@ -36,6 +49,16 @@
     border-radius: 5px;
     border: none;
     cursor: pointer;
+}
+
+.ResetPassTitle {
+    display: none;
+    font-size: 0.9rem;
+    width: 70%;
+    color: white;
+    text-shadow: -1px -1px 2px black;
+    margin: 0.5rem;
+    padding: 0.5rem;
 }
 
 .Logout:hover {
@@ -56,7 +79,13 @@
         font-size: 1.15rem;
     }
     .Or {
-        font-size: 1.15rem;
+        font-size: 1rem;
+    }
+    .Link {
+        font-size: 0.9rem;
+    }
+    .ResetPassTitle {
+        font-size: 1rem;
     }
 }
 
@@ -68,12 +97,21 @@
         font-size: 1.35rem;
     }
     .Or {
-        font-size: 1.35rem;
+        font-size: 1.1rem;
+    }
+    .LinkContainer {
+        padding: 1rem;
+    }
+    .Link {
+        font-size: 1rem;
     }
     .Logout {
         font-size: 0.9rem;
         bottom: 2.25rem;
         right: 0.8rem;
+    }
+    .ResetPassTitle {
+        font-size: 1.25rem;
     }
 }
 
@@ -85,13 +123,22 @@
         font-size: 1.5rem;
     }
     .Or {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
+    }
+    .LinkContainer {
+        padding: 1.25rem;
+    }
+    .Link {
+        font-size: 1.1rem;
     }
     .Logout {
         font-size: 1rem;
         bottom: 3rem;
         right: 1rem;
     }
+    .ResetPassTitle {
+        font-size: 1.35rem;
+    } 
 }
 
 @media (min-width: 1200px) {
@@ -102,11 +149,17 @@
         font-size: 1.75rem;
     }
     .Or {
-        font-size: 1.75rem;
+        font-size: 1.3rem;
+    }
+    .Link {
+        font-size: 1.2rem;
     }
     .Logout {
         font-size: 1.25rem;
         bottom: 3.5rem;
         right: 1.25rem;
+    }
+    .ResetPassTitle {
+        font-size: 1.45rem;
     }
 }
