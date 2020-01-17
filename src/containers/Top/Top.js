@@ -73,10 +73,12 @@ import InputDrawer from '../InputDrawer/InputDrawer';
             const email = document.getElementById('emailInput');
             firebase.auth().sendPasswordResetEmail(email.value)
                 .then(() => {
-                    document.getElementById('resetPassTitle').style.display = 'block';
+                    const resetTitle = document.getElementById('resetPassTitle');
+                    resetTitle.style.display = 'block';
                     setTimeout(() => {
+                        resetTitle.style.display = 'none';
                         dispatch('PASS_RESET');
-                    }, 2500)
+                    }, 3000)
                 })
                 .catch(error => {
                     dispatch('ERROR_RESET_PASS', error.message);

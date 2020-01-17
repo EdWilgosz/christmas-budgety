@@ -67,7 +67,6 @@ const InputDrawer = props => {
                                     <div className={classes.Or}>Don't have an account? <span className={classes.Link} onClick={props.toggleCreateAccount}>Sign up</span></div>
                                     <div className={classes.Or}>Forgot your password? <span className={classes.Link} onClick={props.toggleResetPass}>Reset password</span></div>
                                 </div> 
-                                {/* <SubmitButton inputType="createAccount" clicked={props.toggleCreateAccount} />  */}
                             </div>; 
                     
     let createAccountForm = <div className={classes.InputDrawer}>
@@ -83,8 +82,6 @@ const InputDrawer = props => {
                                     <div className={classes.Or}>Have an account? <span className={classes.Link} onClick={props.toggleCreateAccount}>Log in</span></div>
                                     <div className={classes.Or}>Forgot your password? <span className={classes.Link} onClick={props.toggleResetPass}>Reset password</span></div>
                                 </div>
-                                    {/* <div className={classes.Or}>or</div>
-                                <SubmitButton inputType="login" clicked={props.toggleCreateAccount} />  */}
                             </div>;
 
     let resetPassword =     <div className={classes.InputDrawer}>
