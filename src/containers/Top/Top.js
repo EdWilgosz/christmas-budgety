@@ -70,8 +70,11 @@ import InputDrawer from '../InputDrawer/InputDrawer';
 
         const resetPassword = e => {
             e.preventDefault();
+            const settings = {
+                url: 'https://christmasbudgety.com'
+            }
             const email = document.getElementById('emailInput');
-            firebase.auth().sendPasswordResetEmail(email.value)
+            firebase.auth().sendPasswordResetEmail(email.value, settings)
                 .then(() => {
                     const resetTitle = document.getElementById('resetPassTitle');
                     resetTitle.style.display = 'block';
