@@ -7,7 +7,7 @@ import GiftTitleBar from '../../components/UI/GiftTitleBar/GiftTitleBar';
 import GiftItem from '../../components/UI/GiftItem/GiftItem';
 import BoughtItem from '../../components/UI/BoughtItem/BoughtItem';
 
-const Bottom = props => {
+const Bottom = () => {
 
     const [state, dispatch] = useStore();
 
@@ -61,13 +61,13 @@ const Bottom = props => {
                     dispatch('UPDATE_LISTS', [val[0], val[1], val[2], val[3], val[4], val[5], val[6]]);
                 } 
             })
-        }
+    }
 
         
-
     const check = e => {
-        const curGift = e.target.closest('div').parentNode.id;
-        const selected = [...state.giftList].filter(cur => curGift === cur[0]);
+        const curGift = e.target.closest('div').parentNode;
+        const id = curGift.id;
+        const selected = [...state.giftList].filter(cur => id === cur[0]);
         const payload = {
             id: selected[0][0],
             who: selected[0][1],
@@ -76,12 +76,18 @@ const Bottom = props => {
             price: selected[0][4],
             isLoggedIn: false
         }
-        dispatch('CHECK_GIFT', payload);
+        curGift.style.opacity = '0';
+        setTimeout(() => {
+            dispatch('CHECK_GIFT', payload);
+        }, 750);
+        
     }
 
     const uncheck = e => {
-        const curBoughtItem = e.target.closest('div').parentNode.id;
-        const selected = [...state.boughtList].filter(cur => curBoughtItem === cur[0]);
+
+        const curBoughtItem = e.target.closest('div').parentNode;
+        const id = curBoughtItem.id;
+        const selected = [...state.boughtList].filter(cur => id === cur[0]);
         const payload = {
             id: selected[0][0],
             who: selected[0][1],
@@ -89,18 +95,30 @@ const Bottom = props => {
             where: selected[0][3],
             price: selected[0][4]
         }
-        dispatch('UNCHECK_GIFT', payload);
+        curBoughtItem.style.opacity = '0';
+        setTimeout(() => {
+            dispatch('UNCHECK_GIFT', payload);
+        }, 750);
+        
     }
 
     const remove = e => {
-        const id = e.target.closest('div').parentNode.id;
-        dispatch('REMOVE_GIFT', id);
+        const item = e.target.closest('div').parentNode;
+        const id = item.id;
+        item.style.opacity = '0';
+        setTimeout(() => {
+            dispatch('REMOVE_GIFT', id);
+        }, 750);
+        
     }
 
     const removeBoughtItem = e => {
-        const id = e.target.closest('div').parentNode.id;
-        dispatch('REMOVE_BOUGHT_ITEM', id);
-
+        const item = e.target.closest('div').parentNode;
+        const id = item.id;
+        item.style.opacity = '0';
+        setTimeout(() => {
+            dispatch('REMOVE_BOUGHT_ITEM', id);
+        }, 750);
     }
 
     const gifts = state.giftList.map(cur => <GiftItem key={cur[0]} id={cur[0]} who={cur[1]} what={cur[2]} where={cur[3]} price={FORMAT_NUMBER(cur[4])} check={e=>check(e)} removeGift={e=>remove(e)}/>);
